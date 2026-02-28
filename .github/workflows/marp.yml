@@ -33,19 +33,12 @@ jobs:
           -e MARP_USER=$(id -u):$(id -g) \
           marpteam/marp-cli \
           --html slides/full-slides.md -o slides/index.html
-        docker run --rm -v $GITHUB_WORKSPACE:/home/marp/app \
-          -e MARP_USER=$(id -u):$(id -g) \
-          marpteam/marp-cli \
-          --allow-local-files \
-          --chrome-arg --no-sandbox \
-          --chrome-arg --disable-setuid-sandbox \
-          --pdf slides/full-slides.md -o slides/presentacion-forense-uva.pdf
 
     - name: Prepare public folder
       run: |
         mkdir -p public
         mv slides/index.html public/
-        mv slides/presentacion-forense-uva.pdf public/
+        # Copiamos las imágenes (ahora en slides/images/)
         cp -r slides/images public/ 2>/dev/null || true
         # Limpiamos el archivo temporal
         rm -f slides/full-slides.md
