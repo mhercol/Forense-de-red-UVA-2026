@@ -37,6 +37,8 @@ jobs:
           -e MARP_USER=$(id -u):$(id -g) \
           marpteam/marp-cli \
           --allow-local-files \
+          --chrome-arg --no-sandbox \
+          --chrome-arg --disable-setuid-sandbox \
           --pdf slides/full-slides.md -o slides/presentacion-forense-uva.pdf
 
     - name: Prepare public folder
