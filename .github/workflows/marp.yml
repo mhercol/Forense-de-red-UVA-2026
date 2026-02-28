@@ -1,0 +1,51 @@
+name: Deploy Marp Slides
+
+on:
+  push:
+    branches: [ main ]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v4
+    
+    - name: Marp Build (HTML)
+      run: |
+        # 1. Limpiamos si existe un archivo previo para evitar duplicados
+        rm -f slides/full-slides.md
+
+        # 2. Unimos los archivos en orden numérico estricto dentro de slides/
+        # para que las rutas ./images/ resuelvan a slides/images/ igual que en la vista del MD
+        for f in $(ls -1 slides/[0-9]*.md | sort); do
+          cat "$f" >> slides/full-slides.md
+          echo "" >> slides/full-slides.md  # Añade un salto de línea por seguridad entre archivos
+        done
+
+        # 3. Ejecutamos Marp (el archivo combinado vive en slides/, igual que las imágenes)
+        docker run --rm -v $GITHUB_WORKSPACE:/home/marp/app \
+          -e MARP_USER=$(id -u):$(id -g) \
+          marpteam/marp-cli \
+          --html slides/full-slides.md -o slides/index.html
+
+    - name: Prepare public folder
+      run: |
+        mkdir -p public
+        mv slides/index.html public/
+        # Copiamos las imágenes (ahora en slides/images/)
+        cp -r slides/images public/ 2>/dev/null || true
+        # Limpiamos el archivo temporal
+        rm -f slides/full-slides.md
+
+    - name: Deploy to GitHub Pages
+      uses: peaceiris/actions-gh-pages@v3
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        publish_dir: ./public
+        publish_branch: gh-pages
