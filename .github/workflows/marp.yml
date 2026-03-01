@@ -1,0 +1,50 @@
+name: Deploy Marp Slides
+on:
+  push:
+    branches: [ main ]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pages: write
+  id-token: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Marp Build (HTML & PDF)
+        run: |
+          # Unión de archivos
+          mkdir -p slides
+          for f in $(ls -1 slides/[0-9]*.md | sort); do
+            cat "$f" >> slides/full-slides.md
+            echo "" >> slides/full-slides.md
+          done
+
+          # Generar HTML
+          docker run --rm -v $GITHUB_WORKSPACE:/home/marp/app marpteam/marp-cli --html slides/full-slides.md -o slides/index.html
+
+          # Generar PDF (Con el fix del Sandbox para evitar el TargetCloseError)
+          docker run --rm -v $GITHUB_WORKSPACE:/home/marp/app \
+            marpteam/marp-cli \
+            --chrome-arg --no-sandbox \
+            --chrome-arg --disable-setuid-sandbox \
+            --pdf slides/full-slides.md -o slides/presentacion-forense-uva.pdf
+
+      - name: Prepare public folder
+        run: |
+          mkdir -p public
+          mv slides/index.html public/
+          mv slides/presentacion-forense-uva.pdf public/
+          cp -r slides/images public/ 2>/dev/null || true
+
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./public
+          publish_branch: gh-pages
