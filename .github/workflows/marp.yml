@@ -18,17 +18,21 @@ jobs:
 
       - name: Marp Build (HTML & PDF)
         run: |
-          # Unión de archivos
+          # 1. Unión de archivos (esto ya lo tienes)
           mkdir -p slides
           for f in $(ls -1 slides/[0-9]*.md | sort); do
             cat "$f" >> slides/full-slides.md
             echo "" >> slides/full-slides.md
           done
 
-          # Generar HTML
+          # 2. FIX DE PERMISOS: Damos permiso de escritura a todo el mundo en la carpeta slides
+          # para que el contenedor de Docker pueda escribir el HTML y el PDF
+          chmod -R 777 slides
+
+          # 3. Generar HTML
           docker run --rm -v $GITHUB_WORKSPACE:/home/marp/app marpteam/marp-cli --html slides/full-slides.md -o slides/index.html
 
-          # Generar PDF (Con el fix del Sandbox para evitar el TargetCloseError)
+          # 4. Generar PDF (Con el fix del Sandbox)
           docker run --rm -v $GITHUB_WORKSPACE:/home/marp/app \
             marpteam/marp-cli \
             --chrome-arg --no-sandbox \
