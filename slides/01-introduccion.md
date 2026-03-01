@@ -211,30 +211,6 @@ Correo: mhercol[@]gmail[.]com
 
 ---
 
-# Apéndice — Material de Referencia
-
-<div class="center-content">
-
-Este documento contiene el material teórico de base del curso.
-
-Está pensado como **consulta posterior** a las sesiones presenciales.
-
-<div class="highlight-box">
-
-**Índice:**
-
-A. Modelo TCP/IP y encapsulamiento · B. Sistemas de numeración
-
-C. Formato PCAP / pcapng · D. Herramientas de manipulación de PCAP
-
-E. Protocolos de capa de enlace y red
-
-</div>
-
-</div>
-
----
-
 # Contenido del curso
 
 ```
@@ -255,7 +231,11 @@ Sesión 2 (2h): Forense de Red y Caza de Amenazas
 
 <div class="highlight-box">
 
-**Apéndice disponible:** TCP/IP, OSI, Hex/Binario, formato PCAP, Editcap, Mergecap, Capinfos
+**Apéndice disponible:** 
+Está pensado como **referencia para** las sesiones presenciales.
+A. Modelo TCP/IP y encapsulamiento · B. Sistemas de numeración
+C. Formato PCAP / pcapng · D. Herramientas de manipulación de PCAP
+E. Protocolos de capa de enlace y red
 
 </div>
 
@@ -290,7 +270,7 @@ Sesión 2 (2h): Forense de Red y Caza de Amenazas
 
 <div class="highlight-box">
 
-**Escenario que seguiremos durante el curso:**
+**Escenario que articula el curso:**
 
 </div>
 
@@ -300,14 +280,13 @@ Sesión 2 (2h): Forense de Red y Caza de Amenazas
 **La empresa:**
 
 <div class="list-item"><strong>LogiCorp S.L.</strong> — empresa logística, 300 empleados</div>
-<div class="list-item">Red corporativa mixta: on-premise + AWS</div>
-<div class="list-item">Sin SOC propio, solo un firewall perimetral</div>
+<div class="list-item">Red corporativa on-prem</div>
+<div class="list-item">Con seguridad básica</div>
 
 **El incidente:**
 
-<div class="list-item">El usuario de <strong>Stewie-PC</strong> reporta que su equipo va lento</div>
-<div class="list-item">IT detecta tráfico saliente inusual en el firewall</div>
-<div class="list-item"><strong>Nos llaman para investigar</strong></div>
+<div class="list-item">Un usuario interno exfiltra informacion importante de la empresa</div>
+<div class="list-item">IT captura traficos interesantes y nos piden ayuda para investigar el caso. </div>
 
 </div>
 <div>
