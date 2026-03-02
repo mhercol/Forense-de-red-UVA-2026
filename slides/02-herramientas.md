@@ -4,7 +4,7 @@
 # Crear filtros en Wireshark
 
 <div class="highlight-box">
-
+Tres opciones posibles. Vamos a ver la primera, las otras dos estan en el apendice F.
 **Opción 1:** Barra de filtros — sintaxis directa con **autocompletar**
 
 </div>
