@@ -4,16 +4,16 @@
 # Crear filtros en Wireshark
 
 <div class="highlight-box">
-Tres opciones posibles. Vamos a ver la primera, las otras dos estan en el apendice F.
+Tres opciones posibles. Vamos a ver la primera, las otras dos estan en el apendice F.<br>
 **Opción 1:** Barra de filtros — sintaxis directa con **autocompletar**
 
 </div>
 
 <div class="center-content">
 
-![w:620](./images/slide_034_img_33.png)
+![w:500](./images/slide_034_img_33.png)
 
-![w:620](./images/slide_034_img_34.png)
+![w:500](./images/slide_034_img_34.png)
 
 </div>
 
