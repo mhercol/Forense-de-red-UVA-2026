@@ -930,3 +930,104 @@ Buscar: *"Here's the secret recipe..."*
 ![w:700](./images/slide_107_img_70.png)
 
 </div>
+
+---
+
+# Lab 1 — Extraer el documento filtrado (LogiCorp)
+
+<div class="cols">
+<div>
+
+**Proceso de extracción manual:**
+
+<div class="list-item">Localizar la firma del archivo en el dump hexadecimal</div>
+<div class="list-item">Archivos ZIP/DOCX comienzan con <code>PK</code> = <code>504B0304</code></div>
+<div class="list-item">Limpiar el HEX: eliminar todo lo anterior y posterior a la firma</div>
+<div class="list-item">Guardar como <code>.docx</code> → el documento interno de LogiCorp</div>
+
+</div>
+<div>
+
+![w:380](./images/slide_109_img_72.png)
+
+![w:380](./images/slide_109_img_73.png)
+
+</div>
+</div>
+
+---
+
+# Lab 2 — LogiCorp: El email de Ana
+
+<div class="lab-box">
+
+**Escenario:**
+
+Ademas de haber robado la información, **Ana** usa su cuenta personal AOL para coordinarse con su contacto externo. Afortunadamente el equipo de IT estaba monitorizando y tienen un PCAP que tenemos que analizar.
+
+**PCAP:** `Evidencia02.pcap`
+
+</div>
+
+**Buscamos:**
+
+<div class="list-item">¿Cuál es el email desde el que escribe Ann?</div>
+<div class="list-item">¿Y su contraseña? (en texto claro en el PCAP)</div>
+<div class="list-item">¿Cuál es el email del contacto externo?</div>
+<div class="list-item">¿Qué dos cosas le pide Ann a su contacto?</div>
+<div class="list-item">¿Cuál es el nombre del fichero adjunto enviado?</div>
+<div class="list-item">¿En qué ciudad y país quedan para encontrarse?</div>
+
+---
+# Lab 2 — Buscando conversaciones
+
+<div class="highlight-box">
+
+**Estrategia:** Statistics → Conversations → TCP → 2 conversaciones
+
+<div class="list-item">Conv. 1: email a <code>sec558@gmail.com</code>, asunto <em>"lunch next week"</em> — tráfico normal, descartado</div>
+<div class="list-item">Conv. 2: AUTH LOGIN con credenciales en Base64 — <strong>esta es la correcta</strong></div>
+
+</div>
+
+<div class="cols">
+<div>
+
+**Follow TCP Stream → AUTH LOGIN:**
+
+<div class="list-item">El servidor pide usuario y contraseña en <strong>Base64</strong></div>
+<div class="list-item"><code>c25lYWt5ZzMza0Bhb2wuY29t</code> → <code>sneakyg33k@aol.com</code></div>
+<div class="list-item"><code>NTU4cjAwbHo=</code> → <code>558r00lz</code></div>
+<div class="list-item-sub">Base64 no es cifrado — cualquier decoder online lo lee</div>
+
+</div>
+
+---
+
+<div>
+**El email a `mistersecretx@aol.com`:**
+
+<div class="list-item">Asunto: <em>rendezvous</em></div>
+<div class="list-item">Cuerpo: <em>"Bring your fake passport and a bathing suit"</em></div>
+<div class="list-item">Adjunto: <code>secretrendezvous.docx</code></div>
+
+</div>
+</div>
+
+---
+
+# Lab 2 — La ciudad del encuentro
+
+<div class="highlight-box">
+
+La ciudad **no está en el cuerpo del email** — está en el documento adjunto
+
+**File → Export Objects → IMF** → guardamos el `.eml`
+
+</div>
+
+<div class="list-item">Abrir el <code>.eml</code> y extraer el adjunto</div>
+<div class="list-item">El <code>secretrendezvous.docx</code> contiene una imagen de Google Maps</div>
+<div class="list-item">El mapa muestra la dirección: <strong>Playa del Carmen, México</strong></div>
+
+---
