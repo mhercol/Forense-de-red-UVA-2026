@@ -9,11 +9,11 @@
  │                                                     │
  │   BONUS TRACK — Infraestructuras Modernas           │
  │                                                     │
- │   Este módulo va más allá del curso base.           │
- │   Es material de referencia para cuando trabajes    │
- │   en entornos cloud o con contenedores.             │
+ │   Todo lo que hemos visto hasta ahora aplica        │
+ │   a la infraestructura tradicional. Las empresas    │
+ │   ahora mismo trabajan mas en entornos cloud        │
+ │   y basandose en contenedores y microservicios.     │
  │                                                     │
- │   No es examen. Es contexto profesional real.       │
  │                                                     │
  └─────────────────────────────────────────────────────┘
 ```
