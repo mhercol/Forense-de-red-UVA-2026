@@ -724,13 +724,11 @@ Malware usa DoH (Cloudflare, Google) para ocultar resoluciones de C2
 
 ---
 
-# LogiCorp — Anomalía DNS detectada
+# Detectar anomalías DNS: Beaconing
 
 <div class="warn-box">
 
-**En el caso de LogiCorp:**
-
-Filtramos `dns` y ordenamos por nombre de dominio. Aparece `upd4te-cdn.net` con 240 consultas en 4 horas.
+Algunos ataques C2 usan consultas DNS periódicas hacia dominios controlados por el atacante.
 
 </div>
 
@@ -740,9 +738,9 @@ Filtramos `dns` y ordenamos por nombre de dominio. Aparece `upd4te-cdn.net` con 
 **Señales de alarma:**
 
 <div class="list-item">Intervalo exacto de 60 segundos → <strong>beaconing</strong></div>
-<div class="list-item">Dominio registrado hace 3 días → sospechoso</div>
-<div class="list-item">Sin tráfico web previo a ese dominio → no es legítimo</div>
-<div class="list-item">Responde siempre a la misma IP: <code>185.220.101.12</code></div>
+<div class="list-item">Dominio recién registrado → sospechoso</div>
+<div class="list-item">Tráfico inesperado desde hosts internos</div>
+<div class="list-item">Responde siempre la misma IP</div>
 
 </div>
 <div>
@@ -751,9 +749,8 @@ Filtramos `dns` y ordenamos por nombre de dominio. Aparece `upd4te-cdn.net` con 
 
 **Filtro Wireshark:**
 
-`dns.qry.name contains "upd4te"`
+`dns.qry.name contains "<nombre_del_dominio>"`
 
-→ 240 resultados, todos desde `DESKTOP-MK3`
 
 </div>
 
