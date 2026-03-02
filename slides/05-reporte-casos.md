@@ -107,7 +107,7 @@ JA4 es la evolución de JA3 — más resistente a trivialidades como reordenar c
 
 <div class="list-item">Resoluciones C2 vía <code>dns.google</code></div>
 <div class="list-item">Parece tráfico HTTPS legítimo</div>
-<div class="list-item">Imposible bloquear sin rompimiento TLS</div>
+<div class="list-item">Imposible bloquear sin ruptura de TLS</div>
 
 </div>
 <div>
