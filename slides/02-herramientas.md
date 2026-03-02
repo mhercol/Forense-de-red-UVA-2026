@@ -55,18 +55,6 @@
 
 ---
 
-# Crear filtros en Wireshark
-
-<div class="center-content">
-
-![w:600](./images/slide_036_img_39.png)
-
-![w:600](./images/slide_036_img_40.png)
-
-</div>
-
----
-
 # Filtros de lectura (Display Filters)
 
 <div class="cols">
