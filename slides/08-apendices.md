@@ -1,10 +1,10 @@
+
+
 ---
 
 # A. Modelo TCP/IP
-
 <div class="text-img">
 <div>
-
 El análisis forense de red se centra principalmente en:
 
 <div class="list-item"><strong>Capas 2, 3 y 4</strong> del modelo OSI</div>
