@@ -24,7 +24,6 @@ jobs:
           rm -f input.md
           for f in $(ls -1 slides/[0-9]*.md | sort); do
             cat "$f" >> input.md
-            echo -e "\n---\n" >> input.md
           done
           
           echo "Archivo combinado generado: input.md"
