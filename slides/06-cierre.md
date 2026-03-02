@@ -1,3 +1,4 @@
+
 ---
 
 # Caso LogiCorp — Resolución
