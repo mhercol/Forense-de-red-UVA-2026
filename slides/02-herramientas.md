@@ -4,16 +4,16 @@
 # Crear filtros en Wireshark
 
 <div class="highlight-box">
-Tres opciones posibles. Vamos a ver la primera, las otras dos estan en el apendice F.<br>
+
 **Opción 1:** Barra de filtros — sintaxis directa con **autocompletar**
 
 </div>
 
 <div class="center-content">
 
-![w:500](./images/slide_034_img_33.png)
+![w:620](./images/slide_034_img_33.png)
 
-![w:500](./images/slide_034_img_34.png)
+![w:620](./images/slide_034_img_34.png)
 
 </div>
 
@@ -708,6 +708,252 @@ Algunos ataques C2 usan consultas DNS periódicas hacia dominios controlados por
 <div class="warn-box">
 
 Regla práctica: si un dominio aparece con **periodicidad fija**, es C2 hasta que se demuestre lo contrario
+
+</div>
+
+</div>
+</div>
+
+---
+
+# DHCP — Dynamic Host Configuration Protocol
+
+<div class="cols">
+<div>
+
+**4 pasos: DISCOVER → OFFER → REQUEST → ACK**
+
+```
+Cliente                    Servidor DHCP
+  │                             │
+  │── DHCPDISCOVER (broadcast) ─►│
+  │                             │
+  │◄─── DHCPOFFER (unicast) ────│
+  │                             │
+  │── DHCPREQUEST (broadcast) ──►│
+  │                             │
+  │◄───── DHCPACK (unicast) ────│
+```
+
+**Transporte:** UDP puerto **67** (servidor) / **68** (cliente)
+
+**Wireshark:** `bootp` *(v1.x)* o `dhcp` *(v2.6+)*
+
+</div>
+<div>
+
+**Campos clave del paquete:**
+
+<div class="list-item"><code>chaddr</code> — MAC del cliente (hardware address)</div>
+<div class="list-item"><code>xid</code> — Transaction ID: vincula DISCOVER ↔ ACK</div>
+<div class="list-item"><code>yiaddr</code> — IP ofrecida/asignada al cliente</div>
+<div class="list-item"><code>siaddr</code> — IP del servidor DHCP</div>
+<div class="list-item"><code>options</code> — Opciones extendidas (hostname, lease, fingerprint…)</div>
+
+<div class="highlight-box">
+
+El `xid` permite reconstruir **toda la negociación DORA** como una única transacción en el PCAP
+
+</div>
+
+</div>
+</div>
+
+---
+
+# DHCP — Opciones con Valor Forense
+
+<div class="cols">
+<div>
+
+| Opción | Nombre | Valor forense |
+|--------|--------|---------------|
+| **12** | Hostname | Nombre del equipo en la red |
+| **50** | Requested IP | IP que el cliente quiere conservar |
+| **51** | Lease Time | Duración de la asignación |
+| **53** | Message Type | DISCOVER / OFFER / REQUEST / ACK |
+| **55** | Parameter Request List | **Fingerprint del OS/dispositivo** |
+| **60** | Vendor Class ID | Tipo de cliente (`MSFT 5.0`, `android-dhcp-13`) |
+| **61** | Client Identifier | UUID del cliente (alternativa a la MAC) |
+
+</div>
+<div>
+
+**Extracción con tshark:**
+
+```bash
+# Todas las asignaciones (DHCPACK)
+tshark -r cap.pcap -Y "dhcp.option.dhcp == 5" \
+  -T fields \
+  -e dhcp.ip.your \
+  -e dhcp.hw.mac_addr \
+  -e dhcp.option.hostname
+
+# Vendor Class + fingerprint (Option 55 y 60)
+tshark -r cap.pcap -Y "dhcp" \
+  -T fields \
+  -e dhcp.hw.mac_addr \
+  -e dhcp.option.vendor_class_id \
+  -e dhcp.option.param_request_list
+```
+
+</div>
+</div>
+
+---
+
+# DHCP — Atribución: De la IP al Usuario
+
+<div class="cols">
+<div>
+
+**El problema central del forense de red:**
+
+<div class="list-item">Los PCAPs y logs solo registran <strong>IPs</strong></div>
+<div class="list-item">Las IPs dinámicas cambian con cada lease</div>
+<div class="list-item">La misma IP puede haber sido de 3 equipos distintos en un día</div>
+
+**Cadena de atribución completa:**
+
+<div class="highlight-box">
+
+```
+IP + timestamp exacto
+      ↓ DHCP logs (lease activo en ese momento)
+   MAC address
+      ↓ DHCP Option 12 / DNS inverso
+     Hostname
+      ↓ Active Directory (dNSHostName → samAccountName)
+  Cuenta de usuario
+      ↓ RRHH / inventario HW
+   Persona física
+```
+
+</div>
+
+</div>
+<div>
+
+**Puntos críticos:**
+
+<div class="list-item"><strong>Precisión temporal</strong> — necesitas el timestamp exacto y el lease activo en ese momento</div>
+<div class="list-item-sub">Un lease de 8h puede cubrir varios turnos de trabajo</div>
+
+<div class="list-item"><strong>MAC spoofing</strong> — un atacante puede clonar la MAC de otro equipo</div>
+<div class="list-item-sub">Cruzar con tabla CAM del switch y logs 802.1X</div>
+
+<div class="list-item"><strong>Dispositivos compartidos</strong> — impresoras, puntos de acceso, VMs</div>
+<div class="list-item-sub">Su MAC no identifica a un usuario individual</div>
+
+<div class="warn-box">
+
+Sin logs DHCP históricos con timestamps, la atribución IP→usuario es **imposible**
+
+</div>
+
+</div>
+</div>
+
+---
+
+# DHCP — Fingerprinting de Dispositivos
+
+<div class="cols">
+<div>
+
+**¿Qué es el DHCP fingerprinting?**
+
+<div class="list-item">Cada OS solicita DHCP de forma diferente</div>
+<div class="list-item">La <strong>Option 55</strong> (Parameter Request List) actúa como huella digital</div>
+<div class="list-item">Bases de datos como <strong>Fingerbank</strong> identifican el OS por esta lista</div>
+
+**Ejemplos de PRL (Option 55) conocidas:**
+
+| PRL | OS identificado |
+|-----|-----------------|
+| `1,3,6,15,31,33,43,44,46,47,119,121,249,252` | Windows 10/11 |
+| `1,121,3,6,15,119,252` | macOS |
+| `1,3,6,15,119,121` | Linux (Ubuntu/NetworkManager) |
+| `1,3,6,15,26,28,51,58,59,43` | Android |
+| `1,121,3,6,15,119,252,95,44` | iOS |
+
+</div>
+<div>
+
+**Valor forense:**
+
+<div class="list-item">Detectar un dispositivo <strong>no autorizado</strong> en la red</div>
+<div class="list-item-sub">Ej: Raspberry Pi o dispositivo IoT sin inventariar</div>
+
+<div class="list-item">Detectar <strong>inconsistencias sospechosas</strong></div>
+<div class="list-item-sub">Hostname de Windows con PRL de Linux → posible VM o suplantación</div>
+<div class="list-item-sub">Vendor Class `android-dhcp-13` con hostname `DESKTOP-XYZ` → incongruencia</div>
+
+<div class="list-item">Identificar dispositivos aunque cambien de IP o MAC</div>
+
+<div class="highlight-box">
+
+**Herramientas:** `fingerbank.org` · Zeek (`dhcp.log`) · Arkime · `nmap --script dhcp-discover`
+
+</div>
+
+</div>
+</div>
+
+---
+
+# DHCP — Actividad Maliciosa y Detección
+
+<div class="cols">
+<div>
+
+## Rogue DHCP Server
+
+<div class="list-item">El atacante levanta su propio servidor DHCP en la LAN</div>
+<div class="list-item">Asigna su propia IP como <strong>default gateway o DNS</strong></div>
+<div class="list-item">Obtiene posición de <strong>Man-in-the-Middle</strong> sin ARP spoofing</div>
+
+<div class="warn-box">
+
+Indicador: dos `DHCPOFFER` con `siaddr` distintos respondiendo al mismo `xid`
+
+</div>
+
+## DHCP Starvation
+
+<div class="list-item">El atacante inunda el servidor con `DHCPDISCOVER` usando MACs falsas</div>
+<div class="list-item">Agota el pool de IPs → <strong>Denegación de Servicio</strong> en la LAN</div>
+<div class="list-item">Preludio habitual antes de lanzar un Rogue DHCP</div>
+
+<div class="warn-box">
+
+Indicador: cientos de `DHCPDISCOVER` con `chaddr` distintos en pocos segundos
+
+</div>
+
+</div>
+<div>
+
+## Detección en Wireshark
+
+```bash
+# Ver todos los servidores que responden (Rogue DHCP)
+bootp.option.dhcp == 2        # filtra DHCPOFFER
+# Agrupar por dhcp.ip.server → ¿más de uno?
+
+# DHCP Starvation: muchos DISCOVER rápidos
+bootp.option.dhcp == 1        # DHCPDISCOVER
+# Statistics → Conversations → ver ratio MACs/tiempo
+
+# DHCPNAK: servidor rechaza la petición
+bootp.option.dhcp == 6        # DHCPNAK
+```
+
+<div class="highlight-box">
+
+**Regla de detección:**
+
+Un equipo legítimo hace DORA **una sola vez** al conectarse. Ver **decenas de DISCOVER desde la misma IP** en segundos es indicador de herramienta de ataque activa (`yersinia`, `DHCPig`)
 
 </div>
 
