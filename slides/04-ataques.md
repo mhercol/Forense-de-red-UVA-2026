@@ -187,9 +187,9 @@ Wireshark resuelve los OUI automáticamente en la columna de MACs
 
 **Escenario:**
 
-El análisis del caso LogiCorp nos lleva al origen: ¿cómo entró el atacante?
+Revisando los logs de Logicorp, hemos dado con un trafico que es extraño.
 
-Un usuario de LogiCorp navegó a un sitio web comprometido. Este PCAP captura la sesión completa: desde la navegación normal hasta la descarga del malware.
+Ances de cerrar la investigacion, analiza este PCAP.
 
 **PCAP:** `Evidencia04.pcap` — contraseña del ZIP: `infected`
 
