@@ -19,42 +19,6 @@
 
 ---
 
-# Crear filtros en Wireshark
-
-<div class="highlight-box">
-
-**Opción 2:** Botón **Expression** — selección guiada por protocolo y campo
-
-</div>
-
-<div class="center-content">
-
-![w:600](./images/slide_035_img_35.png)
-
-![w:600](./images/slide_035_img_36.png)
-
-</div>
-
----
-
-# Crear filtros en Wireshark
-
-<div class="highlight-box">
-
-**Opción 3:** Click derecho sobre un paquete o campo → *Apply as Filter*
-
-</div>
-
-<div class="center-content">
-
-![w:500](./images/slide_036_img_37.png)
-
-![w:500](./images/slide_036_img_38.png)
-
-</div>
-
----
-
 # Filtros de lectura (Display Filters)
 
 <div class="cols">
@@ -165,28 +129,6 @@ Pasamos al módulo de protocolos para entender qué estamos viendo.
 
 ---
 
-# Capa de enlace IEEE 802.x — Trama
-
-<div class="center-content">
-
-![w:700](./images/slide_042_img_44.png)
-
-**Tamaño mínimo de trama:** 14 + 46 + 4 bytes (mecanismo anti-colisiones)
-
-</div>
-
----
-
-# Capa de enlace IEEE 802.x — Wireshark
-
-<div class="center-content">
-
-![w:750](./images/slide_043_img_45.png)
-
-</div>
-
----
-
 # ARP — Address Resolution Protocol
 
 <div class="img-text">
@@ -216,10 +158,30 @@ Pasamos al módulo de protocolos para entender qué estamos viendo.
 
 # ARP — En Wireshark
 
-<div class="center-content">
+<div class="img-text">
+<div>
 
-![w:650](./images/slide_044_img_47.png)
+![w:400](./images/slide_044_img_47.png)
 
+</div>
+<div>
+
+**Flujo observable en Wireshark:**
+
+<div class="list-item"><strong>Request</strong>: broadcast — "¿Quién tiene 10.0.0.2?"</div>
+<div class="list-item"><strong>Reply</strong>: unicast — "10.0.0.2 está en AA:BB:CC:..."</div>
+
+<div class="highlight-box">
+
+**Señal de alerta:**
+
+Múltiples IPs anunciando la misma MAC — o la misma IP con MACs distintas — es la firma del ARP spoofing
+
+`arp.duplicate-address-detected`
+
+</div>
+
+</div>
 </div>
 
 ---
@@ -286,62 +248,6 @@ Pasamos al módulo de protocolos para entender qué estamos viendo.
 <div class="list-item">RFC 2460, RFC 4291</div>
 
 ![w:320](./images/slide_048_img_51.png)
-
-</div>
-</div>
-
----
-
-# Cabecera de IPv4
-
-<div class="img-text">
-<div>
-
-![w:380](./images/slide_049_img_52.png)
-
-</div>
-<div>
-
-**Campos clave:**
-
-<div class="list-item"><strong>Versión</strong>: 4 (IPv4) o 6 (IPv6) — otro valor → descarte</div>
-<div class="list-item"><strong>Protocol</strong>: tipo de capa 4 encapsulada</div>
-<div class="list-item-sub">ICMP: 1 | TCP: 6 | UDP: 17 (0x11)</div>
-<div class="list-item"><strong>TTL</strong>: saltos máximos antes del descarte</div>
-<div class="list-item-sub">Windows: 128 | Linux: 64 | Routers: 255</div>
-<div class="list-item"><strong>ECN</strong>: notificación de congestión</div>
-<div class="list-item-sub">00 = No ECN | 01/10 = ECN-Aware | 11 = Congestión</div>
-
-</div>
-</div>
-
----
-
-# Cabecera IPv4 — Campos adicionales
-
-<div class="cols">
-<div>
-
-**Tamaño y calidad de servicio:**
-
-<div class="list-item"><strong>IHL</strong>: longitud de cabecera en palabras de 32 bits</div>
-<div class="list-item-sub">Mínimo: 5 (20 bytes) | Máximo: 15 (60 bytes)</div>
-<div class="list-item"><strong>DSCP/ToS</strong>: prioridad y clase de tráfico</div>
-<div class="list-item-sub">VoIP, vídeo → valores elevados de DSCP</div>
-<div class="list-item"><strong>Total Length</strong>: tamaño total del paquete (cabecera + datos)</div>
-<div class="list-item-sub">Máximo: 65 535 bytes</div>
-
-</div>
-<div>
-
-**Fragmentación e integridad:**
-
-<div class="list-item"><strong>Identification</strong>: ID común a todos los fragmentos del mismo datagrama</div>
-<div class="list-item"><strong>Flags</strong>: control de fragmentación</div>
-<div class="list-item-sub">DF (Don't Fragment) | MF (More Fragments)</div>
-<div class="list-item"><strong>Fragment Offset</strong>: posición del fragmento (múltiplo de 8 bytes)</div>
-<div class="list-item"><strong>Header Checksum</strong>: verificación de integridad solo de la cabecera</div>
-<div class="list-item-sub">Recalculado en cada router (el TTL cambia)</div>
 
 </div>
 </div>
@@ -456,32 +362,89 @@ La fragmentación puede usarse para evadir IDS que solo inspeccionan el primer f
 
 ---
 
-# TCP vs UDP — Cabeceras
+# TCP 3-Way Handshake — Valor Forense
 
-<div class="center-content">
+<div class="cols">
+<div>
 
-![w:700](./images/slide_053_img_55.png)
+**¿Por qué importa al forense?**
 
+<div class="list-item"><strong>SYN masivos sin ACK de respuesta</strong> → escaneo de puertos (Nmap SYN scan)</div>
+<div class="list-item"><strong>Handshake incompleto repetido</strong> → stealth scan o SYN flood (DoS)</div>
+<div class="list-item"><strong>SYN-ACK sin SYN previo en el PCAP</strong> → captura iniciada a mitad de sesión</div>
+<div class="list-item"><strong>RST en respuesta al SYN</strong> → puerto cerrado — el atacante mapea servicios</div>
+
+</div>
+<div>
+
+<div class="highlight-box">
+
+**Filtros clave:**
+
+```wireshark
+# Solo paquetes SYN (inicio de conexión)
+tcp.flags.syn == 1 && tcp.flags.ack == 0
+
+# Detectar SYN scan (Nmap)
+tcp.flags == 0x002
+
+# Handshakes con problemas
+tcp.analysis.flags
+```
+
+</div>
+
+<div class="warn-box">
+
+Muchos SYN hacia distintos puertos desde la misma IP = reconocimiento activo
+
+</div>
+
+</div>
 </div>
 
 ---
 
-# Establecimiento de conexión TCP (3-Way Handshake)
+# TCP 4-Way Teardown — Valor Forense
 
-<div class="center-content">
+<div class="cols">
+<div>
 
-![w:700](./images/slide_054_img_57.jpg)
+**¿Por qué importa al forense?**
+
+<div class="list-item"><strong>RST inesperado</strong> → conexión cortada abruptamente por herramienta, IDS o atacante</div>
+<div class="list-item"><strong>Ráfaga de RST</strong> → escaneo automatizado detectado por el servidor</div>
+<div class="list-item"><strong>FIN sin datos previos</strong> → sesión sospechosamente corta</div>
+<div class="list-item"><strong>Conexión larga sin teardown</strong> → C2 persistente o backdoor activo</div>
+<div class="list-item"><strong>Half-close (un solo FIN)</strong> → canal asimétrico, posible exfiltración lenta</div>
+
+</div>
+<div>
+
+<div class="highlight-box">
+
+**Filtros clave:**
+
+```wireshark
+# Resets anómalos
+tcp.flags.reset == 1
+
+# RST en lugar de FIN
+tcp.flags == 0x004
+
+# Sesiones de larga duración
+tcp.time_relative > 300
+```
 
 </div>
 
----
+<div class="warn-box">
 
-# Fin de conexión TCP (4-Way Teardown)
+Muchos RST hacia el mismo host = escaneo activo o herramienta de ataque detectada
 
-<div class="center-content">
+</div>
 
-![w:700](./images/slide_055_img_58.jpg)
-
+</div>
 </div>
 
 ---
@@ -525,18 +488,6 @@ Diseñados en una era sin modelo de seguridad → son vectores de ataque habitua
 </div>
 
 </div>
-</div>
-
----
-
-# UDP — En Wireshark
-
-<div class="center-content">
-
-![w:750](./images/slide_057_img_59.png)
-
-**Tamaño mínimo:** 8 bytes (solo cabecera) — si vale 0 = jumbograma
-
 </div>
 
 ---

@@ -1,146 +1,7 @@
 ---
 
 
-# Arkime (antes Moloch)
-
-<div class="cols">
-<div>
-
-**Sistema open-source para FPC masivo:**
-
-<div class="list-item">Captura, indexa y permite búsqueda en PCAPs</div>
-<div class="list-item">Escala a terabytes de tráfico histórico</div>
-<div class="list-item">Búsqueda en segundos gracias a Elasticsearch</div>
-
-**Tres componentes:**
-
-<div class="list-item"><strong>Capture</strong> — almacena PCAPs completos en disco</div>
-<div class="list-item"><strong>Elasticsearch</strong> — indexa metadatos de sesiones (SPI)</div>
-<div class="list-item"><strong>Viewer</strong> — interfaz web para búsqueda y análisis</div>
-
-</div>
-<div>
-
-```bash
-# Búsquedas en Arkime (ejemplos):
-
-# TLS 1.3 a IPs rusas
-protocols == tls &&
-  tls.version == "TLSv1.3" &&
-  country == "RU"
-
-# DNS over HTTPS (DoH)
-host == cloudflare-dns.com ||
-  host == dns.google
-
-# Beaconing detectado
-packets >= 50 &&
-  bytes < 10000 &&
-  duration > 3600
-
-# Exfiltración ICMP
-protocols == icmp &&
-  bytes.dst > 100000
-```
-
-</div>
-</div>
-
----
-
-# Arkime — Información SPI
-
-<div class="cols">
-<div>
-
-**Session Profile Information — metadatos extraídos de cada sesión:**
-
-## DNS
-<div class="list-item">Direcciones IP resueltas</div>
-<div class="list-item">Hostnames consultados</div>
-
-## HTTP
-<div class="list-item">Método (GET/POST/PUT...)</div>
-<div class="list-item">Códigos de estado</div>
-<div class="list-item">Cabeceras (User-Agent, Host, Referer)</div>
-<div class="list-item">Tipo de contenido</div>
-
-</div>
-<div>
-
-## TLS/SSL
-<div class="list-item">Certificados (sujeto, emisor, SANs)</div>
-<div class="list-item">Números de serie</div>
-<div class="list-item">JA3/JA4 fingerprints</div>
-
-## SSH
-<div class="list-item">Nombre del cliente y versión</div>
-<div class="list-item">Clave pública del servidor</div>
-
-## SMTP
-<div class="list-item">Cabeceras de correo (From, To, Subject)</div>
-<div class="list-item">Asunto y tipo de contenido</div>
-
-</div>
-</div>
-
----
-
-# Integración con el Stack de Seguridad Moderno
-
-<div class="cols">
-<div>
-
-## Pipeline de Detección y Respuesta
-
-**1. Captura**
-<div class="list-item-sub">TAP/SPAN → Arkime (PCAP indexado)</div>
-<div class="list-item-sub">Zeek/Suricata (logs enriquecidos)</div>
-
-**2. Agregación**
-<div class="list-item-sub">Flows → Elastic Stack / Splunk / Chronicle</div>
-
-**3. Detección**
-<div class="list-item-sub">SIEM Rules + ML → Alertas de anomalías</div>
-<div class="list-item-sub">Beaconing, DGA, lateral movement</div>
-
-</div>
-<div>
-
-**4. Investigación**
-<div class="list-item-sub">Alerta SIEM → Pivot a Arkime con timestamp</div>
-<div class="list-item-sub">Extraer PCAP de contexto</div>
-
-**5. Enriquecimiento**
-<div class="list-item-sub">IOCs → VirusTotal, AbuseIPDB, ThreatFox</div>
-<div class="list-item-sub">Correlación con EDR (proceso, usuario)</div>
-
-**6. Respuesta**
-<div class="list-item-sub">Firewall API → Bloqueo automático</div>
-<div class="list-item-sub">SOAR → Ticket de incidente + notificación</div>
-
-<div class="highlight-box">
-
-**Clave:** PCAP es el 'ground truth' cuando el SIEM duda
-
-</div>
-
-</div>
-</div>
-
----
-
-# REGEX en Wireshark
-
-<div class="center-content">
-
-## Expresiones regulares para detección de amenazas
-
-</div>
-
----
-
-# Regex Cheat Sheet para Wireshark
+# Wireshark — Regex para detección de amenazas
 
 <div class="cols">
 <div>
@@ -274,42 +135,6 @@ Todas estas técnicas abusan de protocolos legítimos — bloquear el protocolo 
 
 ---
 
-# APT Kill Chain — Indicadores de Red
-
-<div class="cols">
-<div>
-
-| Fase | Indicadores en PCAP |
-|------|---------------------|
-| **Reconnaissance** | DNS masivas, patrones Shodan, SYN a rangos de IP |
-| **Delivery** | HTTP download .doc/.zip, User-Agent de herramienta |
-| **Exploitation** | Payload anómalo, respuestas de error del servidor |
-| **C2** | HTTPS con JA3 malicioso, DGA domains, beaconing |
-| **Lateral Movement** | SMB admin$, RDP, WMI entre hosts internos |
-| **Exfiltration** | DNS tunneling, uploads grandes, ICMP con payload |
-
-</div>
-<div>
-
-<div class="highlight-box">
-
-**Regla práctica:**
-
-Cada fase deja huellas distintas — el PCAP es el registro completo de la actividad del atacante
-
-</div>
-
-<div class="warn-box">
-
-APTs sofisticados operan durante **meses** antes de la detección — la retención de flows históricos es crítica
-
-</div>
-
-</div>
-</div>
-
----
-
 # Detecting Lateral Movement
 
 <div class="cols">
@@ -350,6 +175,70 @@ Un servidor web **nunca** debería iniciar una sesión RDP hacia el DC
 `tcp.port == 445 && smb2`
 
 `tcp.port == 3389 && ip.src != [known admin IPs]`
+
+</div>
+
+</div>
+</div>
+
+---
+
+# Movimiento Lateral — Qué buscar en el PCAP
+
+<div class="cols">
+<div>
+
+## Autenticación sospechosa
+
+```bash
+# NTLM: quién se autenticó y desde dónde
+ntlmssp.auth.username
+
+# Kerberos: ticket solicitado para qué servicio
+kerberos.CNameString
+kerberos.sname
+
+# Pass-the-Hash: NTLM sin Kerberos en dominio AD
+# → señal de credencial robada o herramienta tipo Mimikatz
+```
+
+## RDP desde servidores
+
+```bash
+# Un servidor web nunca inicia RDP
+ip.src == 10.0.1.50 && tcp.dstport == 3389
+```
+
+</div>
+<div>
+
+## SMB Admin Shares
+
+```bash
+# Acceso a shares de administración
+smb2.filename contains "admin$"
+smb2.filename contains "ADMIN$"
+smb2.filename contains "C$"
+smb2.filename contains "IPC$"
+```
+
+## WMI / WinRM (ejecución remota)
+
+```bash
+# WMI endpoint mapper → pivoting
+tcp.dstport == 135 && ip.src != [admin_range]
+
+# WinRM (PowerShell remoting)
+tcp.dstport == 5985 || tcp.dstport == 5986
+```
+
+<div class="highlight-box">
+
+**Patrón clásico de pivoting:**
+
+`web_server (10.0.1.50)` → SMB `445` → `dc01 (10.0.0.10)`
+
+Un servidor de aplicación **nunca** accede a shares del DC
 
 </div>
 
@@ -482,6 +371,235 @@ PCAP confirma: HTTP POST a `185.220.101.45:443` con User-Agent de PowerShell
 <div class="warn-box">
 
 Sin correlación entre fuentes, un atacante con OPSEC puede confundir la atribución
+
+</div>
+
+</div>
+</div>
+
+---
+
+# Zeek — El analizador de logs de red
+
+<div class="cols">
+<div>
+
+**¿Qué hace Zeek?**
+
+Analiza tráfico en tiempo real y genera **logs estructurados** — no es un IDS, es el motor que "escribe la historia" del tráfico.
+
+## Logs clave para forense
+
+<div class="list-item"><strong>conn.log</strong> — toda conexión TCP/UDP/ICMP (5-tupla, duración, bytes)</div>
+<div class="list-item"><strong>dns.log</strong> — consultas y respuestas DNS</div>
+<div class="list-item"><strong>http.log</strong> — método, host, URI, user-agent, código de respuesta</div>
+<div class="list-item"><strong>ssl.log</strong> — handshakes TLS: versión, cipher, SNI, JA3/JA4</div>
+<div class="list-item"><strong>files.log</strong> — ficheros transferidos con hash MD5/SHA256 y tipo MIME</div>
+<div class="list-item"><strong>weird.log</strong> — anomalías de protocolo detectadas automáticamente</div>
+
+</div>
+<div>
+
+<div class="highlight-box">
+
+**PCAP vs Zeek logs:**
+
+PCAP = la grabación completa
+
+Zeek logs = el índice estructurado de esa grabación
+
+Para investigar, buscas primero en los logs; el PCAP es el "ground truth" al que pivoteas cuando necesitas el payload.
+
+</div>
+
+<div class="warn-box">
+
+**RITA** (Real Intelligence Threat Analytics) lee logs Zeek y detecta automáticamente beaconing, DGA y conexiones largas de baja frecuencia
+
+</div>
+
+</div>
+</div>
+
+---
+
+# Zeek — Análisis Forense con Logs
+
+<div class="cols">
+<div>
+
+## conn.log — la base de todo
+
+```bash
+# Conexiones largas (C2 beaconing)
+zeek-cut id.orig_h id.resp_h duration bytes \
+  < conn.log | sort -k3 -rn | head -20
+
+# Volumen de datos hacia el exterior
+zeek-cut id.orig_h id.resp_h orig_bytes \
+  < conn.log | sort -k3 -rn | head -20
+```
+
+## files.log — detección de malware
+
+```bash
+# Ejecutables descargados con su hash
+zeek-cut tx_hosts rx_hosts mime_type md5 sha256 \
+  < files.log | grep "application/x-dosexec"
+```
+
+</div>
+<div>
+
+## dns.log — DGA y tunelización
+
+```bash
+# Consultas con hostname muy largo (posible DGA o tunelización)
+zeek-cut query answers \
+  < dns.log | awk 'length($1) > 40'
+
+# Top dominios consultados
+zeek-cut query < dns.log | sort | uniq -c | sort -rn
+```
+
+## ssl.log — TLS sospechoso
+
+```bash
+# Certificados self-signed
+zeek-cut id.orig_h id.resp_h validation_status \
+  < ssl.log | grep "self signed"
+
+# JA3 fingerprint de cliente
+zeek-cut id.orig_h ja3 ja3s < ssl.log
+```
+
+</div>
+</div>
+
+---
+
+
+# Arkime (antes Moloch)
+
+<div class="cols">
+<div>
+
+**Sistema open-source para FPC masivo:**
+
+<div class="list-item">Captura, indexa y permite búsqueda en PCAPs</div>
+<div class="list-item">Escala a terabytes de tráfico histórico</div>
+<div class="list-item">Búsqueda en segundos gracias a Elasticsearch</div>
+
+**Tres componentes:**
+
+<div class="list-item"><strong>Capture</strong> — almacena PCAPs completos en disco</div>
+<div class="list-item"><strong>Elasticsearch</strong> — indexa metadatos de sesiones (SPI)</div>
+<div class="list-item"><strong>Viewer</strong> — interfaz web para búsqueda y análisis</div>
+
+</div>
+<div>
+
+```bash
+# Búsquedas en Arkime (ejemplos):
+
+# TLS 1.3 a IPs rusas
+protocols == tls &&
+  tls.version == "TLSv1.3" &&
+  country == "RU"
+
+# DNS over HTTPS (DoH)
+host == cloudflare-dns.com ||
+  host == dns.google
+
+# Beaconing detectado
+packets >= 50 &&
+  bytes < 10000 &&
+  duration > 3600
+
+# Exfiltración ICMP
+protocols == icmp &&
+  bytes.dst > 100000
+```
+
+</div>
+</div>
+
+---
+
+# Arkime — Información SPI
+
+<div class="cols">
+<div>
+
+**Session Profile Information — metadatos extraídos de cada sesión:**
+
+## DNS
+<div class="list-item">Direcciones IP resueltas</div>
+<div class="list-item">Hostnames consultados</div>
+
+## HTTP
+<div class="list-item">Método (GET/POST/PUT...)</div>
+<div class="list-item">Códigos de estado</div>
+<div class="list-item">Cabeceras (User-Agent, Host, Referer)</div>
+<div class="list-item">Tipo de contenido</div>
+
+</div>
+<div>
+
+## TLS/SSL
+<div class="list-item">Certificados (sujeto, emisor, SANs)</div>
+<div class="list-item">Números de serie</div>
+<div class="list-item">JA3/JA4 fingerprints</div>
+
+## SSH
+<div class="list-item">Nombre del cliente y versión</div>
+<div class="list-item">Clave pública del servidor</div>
+
+## SMTP
+<div class="list-item">Cabeceras de correo (From, To, Subject)</div>
+<div class="list-item">Asunto y tipo de contenido</div>
+
+</div>
+</div>
+
+---
+
+# Integración con el Stack de Seguridad Moderno
+
+<div class="cols">
+<div>
+
+## Pipeline de Detección y Respuesta
+
+**1. Captura**
+<div class="list-item-sub">TAP/SPAN → Arkime (PCAP indexado)</div>
+<div class="list-item-sub">Zeek/Suricata (logs enriquecidos)</div>
+
+**2. Agregación**
+<div class="list-item-sub">Flows → Elastic Stack / Splunk / Chronicle</div>
+
+**3. Detección**
+<div class="list-item-sub">SIEM Rules + ML → Alertas de anomalías</div>
+<div class="list-item-sub">Beaconing, DGA, lateral movement</div>
+
+</div>
+<div>
+
+**4. Investigación**
+<div class="list-item-sub">Alerta SIEM → Pivot a Arkime con timestamp</div>
+<div class="list-item-sub">Extraer PCAP de contexto</div>
+
+**5. Enriquecimiento**
+<div class="list-item-sub">IOCs → VirusTotal, AbuseIPDB, ThreatFox</div>
+<div class="list-item-sub">Correlación con EDR (proceso, usuario)</div>
+
+**6. Respuesta**
+<div class="list-item-sub">Firewall API → Bloqueo automático</div>
+<div class="list-item-sub">SOAR → Ticket de incidente + notificación</div>
+
+<div class="highlight-box">
+
+**Clave:** PCAP es el 'ground truth' cuando el SIEM duda
 
 </div>
 

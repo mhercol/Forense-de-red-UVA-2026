@@ -114,27 +114,13 @@
 
 ---
 
-# El caso Ana — la máquina que recibió el fichero
-
-<div class="warn-box">
-
-Mientras se investigaba a Ana, el equipo de seguridad analizó el tráfico de la máquina que **recibió** `recipe.docx`: `annlaptop` (`192.168.1.159`).
-
-El PCAP de esa máquina muestra tráfico SMTP saliente en texto claro — una cuenta de correo personal siendo usada desde la red corporativa.
-
-</div>
-
----
-
 # Lab 2 — LogiCorp: El email de Ann
 
 <div class="lab-box">
 
 **Escenario:**
 
-El PCAP capturado en el perímetro muestra tráfico **SMTP saliente** desde `annlaptop` (`192.168.1.159`) en texto claro.
-
-Quien lo envía es **Ann Dercover** — la misma máquina que recibió la receta. Está usando su cuenta personal AOL para coordinarse con su contacto externo.
+El PCAP capturado en el perímetro muestra tráfico **SMTP saliente** desde `annlaptop` (`192.168.1.159`) en texto claro — la misma máquina que recibió la receta. **Ann Dercover** usa su cuenta personal AOL para coordinarse con su contacto externo.
 
 **PCAP:** `Evidencia02.pcap`
 
@@ -149,27 +135,12 @@ Quien lo envía es **Ann Dercover** — la misma máquina que recibió la receta
 <div class="list-item">¿Cuál es el nombre del fichero adjunto enviado?</div>
 <div class="list-item">¿En qué ciudad y país quedan para encontrarse?</div>
 
----
-
-# Lab 2 — Análisis de conversaciones
-
 <div class="highlight-box">
 
-**Estrategia:** Statistics → Conversations → TCP
+**Estrategia:** Statistics → Conversations → TCP → 2 conversaciones
 
-2 conversaciones — abrimos la primera para analizar si hay correo electrónico
-
-</div>
-
----
-
-# Lab 2 — Primera conversación
-
-<div class="highlight-box">
-
-Follow TCP Stream → Email a `sec558@gmail.com`, asunto *"lunch next week"*
-
-Ann dice que no puede quedar. **No es relevante** — es un email de cortesía (o distracción).
+<div class="list-item">Conv. 1: email a <code>sec558@gmail.com</code>, asunto <em>"lunch next week"</em> — tráfico normal, descartado</div>
+<div class="list-item">Conv. 2: AUTH LOGIN con credenciales en Base64 — <strong>esta es la correcta</strong></div>
 
 </div>
 
@@ -415,6 +386,52 @@ Si aparece dominio con caracteres aleatorios = **DGA** (Domain Generation Algori
 
 ---
 
+# Exfiltración — FTP y SMB
+
+<div class="cols">
+<div>
+
+## FTP — Canal de control cleartext
+
+<div class="list-item">Puerto <strong>21/tcp</strong> (comandos) + <strong>20/tcp</strong> o efímero (datos)</div>
+<div class="list-item">Comandos en texto claro en el canal de control</div>
+<div class="list-item"><code>STOR</code> = upload hacia el servidor externo</div>
+<div class="list-item"><code>RETR</code> = descarga desde el servidor</div>
+
+```bash
+# Filtros Wireshark
+ftp           # canal de control
+ftp-data      # transferencia de ficheros
+ftp.request.command == "STOR"  # uploads
+```
+
+</div>
+<div>
+
+## SMB — Exfiltración interna (y externa)
+
+<div class="list-item">Puerto <strong>445/tcp</strong> — SMB2/SMB3</div>
+<div class="list-item">Shares admin (<code>C$</code>, <code>admin$</code>) = movimiento lateral + exfil</div>
+<div class="list-item">SMB3 cifrado → solo metadatos visibles</div>
+
+```bash
+# Write hacia un share = upload
+smb2.cmd == 9     # SMB2 Write
+smb2.filename contains "C$"
+smb2.filename contains "admin$"
+```
+
+<div class="warn-box">
+
+FTP a IPs externas desconocidas · SMB fuera de horario · Volumen bytes\_dst >> normal
+
+</div>
+
+</div>
+</div>
+
+---
+
 # Flujos de Información (Network Flows)
 
 <div class="center-content">
@@ -434,71 +451,37 @@ Si aparece dominio con caracteres aleatorios = **DGA** (Domain Generation Algori
 
 **¿Qué es un flow (flujo)?**
 
-Resumen de tráfico **unidireccional** que comparte:
+Resumen de tráfico **unidireccional** que comparte la quíntupla:
 
-<div class="list-item">IP origen</div>
-<div class="list-item">IP destino</div>
-<div class="list-item">Puerto origen</div>
-<div class="list-item">Puerto destino</div>
+<div class="list-item">IP origen / destino</div>
+<div class="list-item">Puerto origen / destino</div>
 <div class="list-item">Protocolo</div>
 
-*RFC 3954: "secuencia unidireccional de paquetes con alguna propiedad común"*
+**Cada flujo contiene además:**
 
-</div>
-<div>
-
-**Los datos de un flujo contienen:**
-
-<div class="list-item">Los 5 elementos de la quíntupla</div>
-<div class="list-item">Flags TCP de la sesión</div>
-<div class="list-item">Bytes y paquetes totales transferidos</div>
+<div class="list-item">Flags TCP, bytes y paquetes totales</div>
 <div class="list-item">Hora de inicio, fin y duración</div>
 <div class="list-item">Sensor que recolectó el flujo</div>
 
+</div>
+<div>
+
+**Para qué sirve en forense:**
+
+<div class="list-item">Identificar patrones y aislar actividad sospechosa</div>
+<div class="list-item">Detectar beaconing C2 por intervalos o volumen</div>
+<div class="list-item">Descubrir exfiltración (transferencias anómalas hacia exterior)</div>
+<div class="list-item">Construir un <strong>baseline</strong> de comportamiento normal</div>
+
 <div class="highlight-box">
 
-Un flujo ≠ una conexión TCP — puede haber múltiples conexiones en un flujo o viceversa
+Estándares: **NetFlow** (Cisco) · **IPFIX** (IETF) · **sFlow** (muestreo)
+
+Un flujo ≠ una conexión TCP
 
 </div>
 
 </div>
-</div>
-
----
-
-# Análisis de Flujos — Usos
-
-<div class="cols">
-<div>
-
-**El análisis de flujos se usa para:**
-
-<div class="list-item">Identificar patrones en el tráfico</div>
-<div class="list-item">Aislar actividad sospechosa</div>
-<div class="list-item">Analizar protocolos de capas superiores</div>
-<div class="list-item">Extraer información sobre comunicaciones</div>
-
-</div>
-<div>
-
-**Estándares:**
-
-<div class="list-item"><strong>NetFlow v5/v7/v9</strong> — Cisco (1996), ahora IETF</div>
-<div class="list-item"><strong>IPFIX</strong> — "NetFlow v10", estándar abierto</div>
-<div class="list-item"><strong>sFlow</strong> — muestreo con menor granularidad</div>
-<div class="list-item"><strong>jFlow</strong> — implementación Juniper de sFlow</div>
-
-</div>
-</div>
-
----
-
-# NetFlow v9 — Formato
-
-<div class="center-content">
-
-![w:700](./images/slide_081_img_65.png)
-
 </div>
 
 ---
@@ -538,105 +521,35 @@ Quién → quién | protocolo | duración | velocidad | dirección de la transfe
 
 ---
 
-# SNMP vs *Flow
-
-<div class="cols">
-<div>
-
-## SNMP (polling)
-
-<div class="list-item">El gestor solicita información al dispositivo</div>
-<div class="list-item">Necesita decidir <strong>cuándo</strong> hacer el poll</div>
-<div class="list-item">Para cuando se hace el poll, la info puede no estar</div>
-<div class="list-item">La correlación requiere múltiples peticiones</div>
-<div class="list-item">El equipo no controla la cantidad de información</div>
-
-</div>
-<div>
-
-## NetFlow (push)
-
-<div class="list-item">La información se manda <strong>de forma asíncrona</strong></div>
-<div class="list-item">Postprocesado posible en el router/switch</div>
-<div class="list-item">La información se borra del equipo tras exportar</div>
-<div class="list-item">Escalable — cada router/switch es un sensor</div>
-
-<div class="highlight-box">
-
-Los flows son la forma de **telemetría** enviada por routers y switches — cada uno es un sensor de red
-
-</div>
-
-</div>
-</div>
-
----
-
-# De Dónde se Obtienen los Flows
-
-<div class="cols">
-<div>
-
-**Fuentes:**
-
-<div class="list-item">Del <strong>router o switch</strong> directamente (NetFlow/sFlow)</div>
-<div class="list-item">Generados a partir de un <strong>PCAP existente</strong></div>
-<div class="list-item">Generados por <strong>probes de red</strong> que analizan el tráfico en tiempo real</div>
-
-</div>
-<div>
-
-<div class="warn-box">
-
-**Limitaciones:**
-
-<div class="list-item">Capacidad del enlace analizado</div>
-<div class="list-item">Recursos de hardware del dispositivo</div>
-<div class="list-item">Muestreo (sFlow) → no todos los paquetes</div>
-<div class="list-item">Similares a los desafíos del despliegue de Arkime</div>
-
-</div>
-
-</div>
-</div>
-
----
-
 # Análisis de Flujos — Técnicas
 
 <div class="cols">
 <div>
 
-## Filtrado
-
-<div class="list-item">Básico para reducir el espacio de análisis</div>
-<div class="list-item">Aislar actividad por IP específica</div>
-<div class="list-item">Filtrar por patrones de tráfico conocidos</div>
-<div class="list-item">Usar un pequeño porcentaje para análisis detallado</div>
-
 ## Baseline
 
-<div class="list-item">Los flows permiten mayor retención de datos</div>
-<div class="list-item">Construir perfil de actividad "normal"</div>
+<div class="list-item">Los flows permiten retención larga → construir perfil de actividad normal</div>
 <div class="list-item">Detectar cambios drásticos en el comportamiento de un host</div>
+<div class="list-item">Sin baseline no hay anomalía — sin anomalía no hay alerta</div>
+
+## Beaconing
+
+<div class="list-item">Conexiones periódicas de duración corta hacia el mismo destino</div>
+<div class="list-item">Intervalo fijo = señal de C2 automatizado</div>
+<div class="list-item">Visible en flows incluso si el payload está cifrado</div>
 
 </div>
 <div>
 
-## Valores no deseados
+## Exfiltración por volumen
 
-<div class="list-item">Similar a las reglas de un IDS</div>
-<div class="list-item">Lista de IPs, puertos o protocolos sospechosos</div>
-
-## Búsqueda de patrones
-
-<div class="list-item">Según IP, puertos, protocolos</div>
-<div class="list-item">Intentos de conexión y escaneo de puertos</div>
-<div class="list-item">Transferencias grandes y dirección de la transferencia</div>
+<div class="list-item">Transferencias anómalas hacia el exterior (bytes out >> bytes in)</div>
+<div class="list-item">Un host que normalmente envía 1 MB/día de repente envía 10 GB</div>
+<div class="list-item">La dirección importa: upload sospechoso &gt; download sospechoso</div>
 
 <div class="highlight-box">
 
-Anomalía clásica: Un host que normalmente envía 1MB/día de repente envía 10GB hacia el exterior
+Los flows no tienen payload — pero **el comportamiento traiciona la intención**
 
 </div>
 
@@ -686,81 +599,39 @@ Casi todas las herramientas de seguridad usan un modelo de **seguridad negativa:
 
 ---
 
-# Planificación del FPC
+# Planificación del FPC — Las 3 preguntas clave
 
 <div class="cols">
 <div>
 
-**Preguntas clave al desplegar:**
-
-<div class="list-item">¿<strong>Dónde</strong> lo colocamos en la red?</div>
-<div class="list-item">¿<strong>Qué</strong> va a monitorizar?</div>
-<div class="list-item">¿Cuáles son las necesidades de <strong>retención</strong>?</div>
-<div class="list-item">¿Qué hay de la <strong>redundancia y escalabilidad</strong>?</div>
-<div class="list-item">¿Herramienta <strong>comercial o open source</strong>?</div>
-
-</div>
-<div>
-
-**Colocación recomendada:**
+## ¿Dónde capturar?
 
 <div class="list-item">En los <strong>límites entre redes confiables y no confiables</strong></div>
-<div class="list-item-sub">Entre LAN e Internet</div>
-<div class="list-item-sub">Entre Internet y la DMZ</div>
-<div class="list-item-sub">Entre segmentos críticos internos</div>
+<div class="list-item-sub">LAN ↔ Internet · Internet ↔ DMZ · segmentos críticos internos</div>
 
 <div class="warn-box">
 
-FPC detrás de un FW que actúa como proxy → solo ve tráfico del proxy, no del cliente real
+FPC detrás de un proxy → solo ve el tráfico del proxy, no del cliente real
 
 </div>
 
-</div>
-</div>
+## ¿Qué almacenar?
 
----
-
-# Necesidades de Almacenamiento FPC
-
-<div class="cols">
-<div>
-
-**Factores a considerar:**
-
-<div class="list-item">¿Existe obligación legal de retención?</div>
-<div class="list-item">¿Cuál es el <strong>tiempo medio de detección</strong> (MTTD)?</div>
-<div class="list-item">¿SOC 24/7 o solo en horario de oficina?</div>
-<div class="list-item">MTTD determina el **mínimo** tiempo de almacenamiento</div>
-
-**Cálculo básico:**
-
-```
-Capacidad del enlace
-× ocupación media del enlace
-× segundos de almacenamiento
-= bytes necesarios
-```
+<div class="list-item">Todo lo posible, pero priorizar tráfico Norte-Sur</div>
+<div class="list-item">Filtros BPF para excluir ruido (backups, monitorización interna)</div>
 
 </div>
 <div>
+
+## ¿Durante cuánto tiempo?
+
+<div class="list-item">Mínimo: el <strong>MTTD</strong> de tu organización (tiempo medio de detección)</div>
+<div class="list-item">Regla práctica: si tardas 30 días en detectar una brecha, necesitas 30+ días de FPC</div>
+<div class="list-item">El MTTD medio global en 2024 es de <strong>~194 días</strong></div>
 
 <div class="highlight-box">
 
-**Ejemplo:**
-
-0.75 Gbps × 75% uso × 72h retención
-
-= `0.75 × 0.75 × 72 × 3600 / 8 / 1024³`
-
-≈ **~24 TB** de almacenamiento
-
-</div>
-
-<div class="warn-box">
-
-**Ojo:** Además del espacio hay que tener en cuenta la **velocidad de escritura** de los discos
-
-→ Puede requerir combinación SSD + HDD o RAID
+Cuanto mayor el MTTD, mayor el almacenamiento necesario — y más cara la investigación
 
 </div>
 
@@ -769,40 +640,46 @@ Capacidad del enlace
 
 ---
 
-# Infraestructura FPC
+# ¿Por qué casi nadie tiene FPC completo en producción?
 
 <div class="cols">
 <div>
 
-## Network TAPs (preferido)
+**El problema no es técnico — es económico:**
 
-<div class="list-item">Método preferido para FPC</div>
-<div class="list-item">TAP físico — tráfico idéntico al original</div>
-<div class="list-item">No requiere SPAN port</div>
-<div class="list-item">No descarta paquetes en caso de saturación</div>
+<div class="list-item">Un enlace de 1 Gbps al 75% de uso genera <strong>~32 TB/día</strong></div>
+<div class="list-item">Con retención de 72h → ~96 TB solo para ese enlace</div>
+<div class="list-item">Una red corporativa media tiene varios enlaces de ese calibre</div>
 
-## NICs de captura
+**El cálculo:**
 
-<div class="list-item">Tarjetas con chips especializados</div>
-<div class="list-item">Capaces de procesar tráfico de alta velocidad</div>
-<div class="list-item">Con timestamping hardware de alta precisión</div>
+```
+0.75 Gbps × 75% uso × 72h retención
+= 0.75 × 0.75 × 259200 / 8 / 1024³
+≈ 24 TB por enlace
+```
 
 </div>
 <div>
 
-## Filtrado BPF en captura
+<div class="warn-box">
 
-<div class="list-item">No todo el tráfico en el TAP es útil</div>
-<div class="list-item-sub">Tráfico del propio FPC</div>
-<div class="list-item-sub">Tráfico de backup</div>
-<div class="list-item">Filtros BPF en las NICs de captura</div>
-<div class="list-item">Soportados por OpenFPC, Snort, Suricata, Arkime</div>
+**La realidad:**
 
-## Packet Brokers
+La mayoría de organizaciones tiene FPC solo en los puntos críticos, con retención de 3–7 días — insuficiente dado el MTTD medio de 194 días
 
-<div class="list-item">Para tráfico excesivamente alto</div>
-<div class="list-item">Balanceo de carga entre sensores</div>
-<div class="list-item">Filtrado L2-L7 y descifrado</div>
+</div>
+
+<div class="highlight-box">
+
+**Alternativa práctica:**
+
+FPC completo en perímetro (días) + Flows en toda la red (meses) + SIEM con logs (años)
+
+Cada capa cubre lo que la anterior no puede retener
+
+</div>
 
 </div>
 </div>
+

@@ -46,6 +46,59 @@ SHA-256 de cada PCAP documentado. Evidencia preservada para el equipo legal.
 
 ---
 
+# Informe Forense de Red — Estructura
+
+<div class="cols">
+<div>
+
+**Cabecera e identificación**
+
+<div class="list-item"><strong>Caso:</strong> ID único, fecha, analista</div>
+<div class="list-item"><strong>Cadena de custodia:</strong> SHA-256 de cada PCAP, herramienta de captura, timestamps UTC</div>
+<div class="list-item"><strong>Alcance:</strong> rango de IPs, período analizado, fuentes utilizadas</div>
+
+**Resumen ejecutivo**
+
+<div class="list-item">1 párrafo: qué ocurrió, cuándo, quién/qué sistema, impacto</div>
+<div class="list-item">Sin tecnicismos — dirigido a dirección y equipo legal</div>
+
+**Hallazgos técnicos**
+
+<div class="list-item">Cronología de eventos con timestamps UTC exactos</div>
+<div class="list-item">IPs, puertos, protocolos, hashes de ficheros extraídos</div>
+<div class="list-item">Capturas de Wireshark anotadas como evidencia numerada</div>
+
+</div>
+<div>
+
+**IOCs documentados**
+
+```
+IP maliciosa:    194.87.234.129
+Dominio C2:      spotsbill.com
+Hash ejecutable: 3a4f2b... (SHA-256)
+Primer contacto: 2024-11-14 22:55:03 UTC
+```
+
+**Conclusiones y atribución**
+
+<div class="list-item">Tipo de incidente (insider threat, malware, exfiltración…)</div>
+<div class="list-item">Sistemas afectados confirmados</div>
+<div class="list-item">Datos comprometidos (si se pueden determinar)</div>
+
+<div class="highlight-box">
+
+**Regla de oro:**
+
+Todo lo que afirmes en el informe debe poder referenciarse a una evidencia numerada. Si no tienes el PCAP que lo respalde, no lo afirmes.
+
+</div>
+
+</div>
+</div>
+
+---
+
 # Próximos Pasos en tu Carrera
 
 <div class="cols">

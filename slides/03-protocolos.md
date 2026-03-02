@@ -11,7 +11,7 @@
 <div class="list-item">TLS 1.2 → se podía usar la clave privada del servidor</div>
 <div class="list-item">TLS 1.3 → <strong>Perfect Forward Secrecy obligatorio</strong></div>
 <div class="list-item-sub">Cada sesión tiene claves efímeras distintas</div>
-<div class="list-item-sub">La clave privada ya no descifra nada</div>
+<div class="list-item-sub">La clave privada del servidor ya no permite descifrar sesiones pasadas</div>
 
 **Solución: `SSLKEYLOGFILE`**
 
@@ -681,83 +681,6 @@ El PCAP es el "ground truth" — cuando el SIEM duda, el PCAP tiene la respuesta
 
 ---
 
-# Fuentes — WiFi y Switches
-
-<div class="cols">
-<div>
-
-## Redes WiFi (WLAN)
-
-<div class="list-item">Información normalmente cifrada (WPA2/WPA3)</div>
-<div class="list-item">**Frames de gestión y control no suelen ir cifradas:**</div>
-<div class="list-item-sub">APs anuncian SSID, presencia y capacidades</div>
-<div class="list-item-sub">MACs de equipos autenticados</div>
-<div class="list-item-sub">Análisis de volumen de tráfico</div>
-<div class="list-item">En WPA2 con PSK: se puede descifrar con la clave</div>
-
-</div>
-<div>
-
-## Switches (Capa 2)
-
-<div class="list-item">Interconectan segmentos de red locales</div>
-<div class="list-item">**Tabla CAM (Content Addressable Memory):**</div>
-<div class="list-item-sub">Mapea puertos físicos → MACs</div>
-<div class="list-item-sub">Permite ubicar físicamente un dispositivo</div>
-<div class="list-item-sub">Clave para localizar un equipo comprometido</div>
-
-<div class="highlight-box">
-
-`show mac address-table | include [MAC]`
-
-</div>
-
-</div>
-</div>
-
----
-
-# Fuentes — Routers
-
-<div class="cols">
-<div>
-
-**Función:**
-
-<div class="list-item">Conectan y encaminan tráfico entre diferentes redes</div>
-<div class="list-item">Permiten comunicación MAN/WAN/LAN</div>
-
-**Información forense:**
-
-<div class="list-item"><strong>Tablas de enrutamiento</strong> — el path de las comunicaciones</div>
-<div class="list-item"><strong>Filtrado de paquetes</strong> — ACLs aplicadas</div>
-<div class="list-item"><strong>Logs de acceso</strong> — eventos de conexión</div>
-<div class="list-item"><strong>Información de flujos</strong> — NetFlow/IPFIX</div>
-
-</div>
-<div>
-
-<div class="highlight-box">
-
-Los routers son los **IDS más desplegados** (y más rudimentarios):
-
-<div class="list-item">Todos tienen ACLs</div>
-<div class="list-item">Muchos tienen NetFlow habilitado</div>
-<div class="list-item">Los logs suelen ir a un SIEM o syslog</div>
-
-</div>
-
-<div class="warn-box">
-
-Los logs del router pueden ser la única fuente de evidencia cuando no hay PCAP
-
-</div>
-
-</div>
-</div>
-
----
-
 # Fuentes — DHCP y DNS
 
 <div class="cols">
@@ -801,107 +724,22 @@ Muchos ataques (C2, exfiltración) se delatan en los logs DNS antes que en cualq
 
 ---
 
-# Fuentes — Autenticación y NIDS
+# Otras fuentes con valor forense
 
-<div class="cols">
-<div>
-
-## Servidores de Autenticación (AD/LDAP/RADIUS)
-
-<div class="list-item">Servicios de autenticación centralizada</div>
-<div class="list-item">Provisionamiento y auditoría de cuentas</div>
-<div class="list-item">**Información forense:**</div>
-<div class="list-item-sub">Intentos fallidos → fuerza bruta</div>
-<div class="list-item-sub">Éxitos en horas sospechosas</div>
-<div class="list-item-sub">Localizaciones no habituales para el usuario</div>
-<div class="list-item-sub">Cambios de privilegios inesperados</div>
-
-</div>
-<div>
-
-## NIDS/NIPS
-
-<div class="list-item">Monitorizan tráfico en tiempo real</div>
-<div class="list-item">Detectan y alertan de eventos sospechosos</div>
-<div class="list-item">**Información forense:**</div>
-<div class="list-item-sub">Actividades sospechosas en curso</div>
-<div class="list-item-sub">Tráfico hacia C2 conocidos</div>
-<div class="list-item-sub">Fugas de información</div>
-<div class="list-item-sub">Recuperación de contenido completo (en algunos casos)</div>
-<div class="list-item-sub">Normalmente: IP origen/destino, puertos, timestamp</div>
-
-</div>
-</div>
-
----
-
-# Fuentes — Firewalls y Proxies
-
-<div class="cols">
-<div>
-
-## Firewalls (NGFW)
-
-<div class="list-item">Inspección con tres acciones: permitir, descartar, registrar</div>
-<div class="list-item">Basados en IP, puerto, protocolo y payload</div>
-<div class="list-item">**Información forense:**</div>
-<div class="list-item-sub">Log granular de tráfico permitido y denegado</div>
-<div class="list-item-sub">Logs de cambios de configuración</div>
-<div class="list-item-sub">Alertas IPS integradas</div>
-<div class="list-item-sub">Identificación de aplicaciones (L7)</div>
-
-</div>
-<div>
-
-## Proxies Web
-
-<div class="list-item">Mejoran rendimiento mediante caché</div>
-<div class="list-item">Registran, inspeccionan y filtran tráfico web</div>
-<div class="list-item">**Información forense:**</div>
-<div class="list-item-sub">Logs granulares de navegación (larga retención)</div>
-<div class="list-item-sub">Perfiles de navegación por IP / usuario</div>
-<div class="list-item-sub">Detección de phishing exitoso</div>
-<div class="list-item-sub">Identificación de malware web</div>
-<div class="list-item-sub">Contenido cacheado (lo que vio el usuario)</div>
-
-</div>
-</div>
-
----
-
-# Fuentes — Servidores de Aplicación y Logs Centralizados
-
-<div class="cols">
-<div>
-
-## Servidores de Aplicación
-
-<div class="list-item">Bases de datos</div>
-<div class="list-item">Servidores Web</div>
-<div class="list-item">Servidores de correo (SMTP/IMAP)</div>
-<div class="list-item">Servidores de mensajería (IM)</div>
-<div class="list-item">Servidores VoIP</div>
+| Fuente | Dato clave forense |
+|--------|--------------------|
+| **WiFi / Switches** | MACs autenticadas, tabla CAM → ubicación física del equipo |
+| **Routers** | NetFlow/IPFIX, ACLs — puede ser la única evidencia sin PCAP |
+| **Auth (AD/RADIUS)** | Intentos fallidos, accesos en horario anómalo, escalada de privilegios |
+| **NIDS/NIPS** | Alertas de C2 conocidos, fugas de datos, IOCs en tiempo real |
+| **Firewalls (NGFW)** | Log granular permitido/denegado, identificación de aplicaciones L7 |
+| **Proxies web** | Historial de navegación, phishing exitoso, contenido cacheado |
+| **SIEM** | Correlación multi-fuente, retención histórica cuando el equipo es comprometido |
 
 <div class="highlight-box">
 
-Guardan logs de sus aplicaciones — **esenciales** para descifrar qué ocurrió realmente a nivel de aplicación
+Ver **Apéndice H** para el detalle de cada fuente
 
-</div>
-
-</div>
-<div>
-
-## SIEM / Logs Centralizados
-
-<div class="list-item">Combina logs de muchas fuentes</div>
-<div class="list-item">Correlación, análisis y fechado automático</div>
-<div class="list-item">**Valor forense:**</div>
-<div class="list-item-sub">Diseñado para identificar y responder a incidentes</div>
-<div class="list-item-sub">Salva la información si un servidor es comprometido</div>
-<div class="list-item-sub">Retiene datos durante más tiempo que los dispositivos</div>
-<div class="list-item-sub">Análisis forense y visualización temporal</div>
-
-</div>
 </div>
 
 ---
@@ -1041,7 +879,7 @@ El equipo de **Ana** (`192.168.1.158`), empleada con acceso al activo más crít
 
 ---
 
-# Lab 1 — Buscamos Respuestas
+# Lab 1 — Investigar el tráfico AIM
 
 <div class="cols">
 <div>
@@ -1053,51 +891,29 @@ El equipo de **Ana** (`192.168.1.158`), empleada con acceso al activo más crít
 <div class="list-item">¿Cuál es el nombre del archivo que transfirió?</div>
 <div class="list-item">¿Puedes recuperar el documento intercambiado?</div>
 
+**Cómo encontrarlo:**
+
+<div class="list-item">AIM usa el puerto <strong>5190/TCP</strong> → filtro: <code>tcp.port == 5190</code></div>
+<div class="list-item">Follow TCP Stream → mensajes en texto claro</div>
+<div class="list-item">Cabecera OFT2 (<em>Oscar File Transfer</em>) → nombre del fichero</div>
+<div class="list-item">Payload <code>PK...</code> = ZIP/DOCX extraíble directamente</div>
+
 </div>
 <div>
 
 <div class="highlight-box">
 
-**Pistas:**
-
-<div class="list-item">IP de Ana: <code>192.168.1.158</code></div>
-<div class="list-item">Buscar protocolo de mensajería instantánea (IM)</div>
-<div class="list-item">Seguir los streams TCP desde esa IP</div>
+**IP de Ana:** `192.168.1.158`
 
 </div>
-
-</div>
-</div>
-
----
-
-# Lab 1 — Cómo encontrar el tráfico AIM
-
-<div class="cols">
-<div>
-
-**Filtrar el protocolo:**
-
-<div class="list-item">AIM usa el puerto <strong>5190/TCP</strong></div>
-<div class="list-item">Filtro: <code>tcp.port == 5190</code></div>
-<div class="list-item">Follow TCP Stream → mensajes en texto claro</div>
-
-**Lo que aparece en el stream:**
-
-<div class="list-item">Nombre de usuario (<code>Sec558user1</code>) y los mensajes de chat</div>
-<div class="list-item">El nombre del fichero en la cabecera OFT2 (<em>Oscar File Transfer</em>)</div>
-<div class="list-item">El fichero completo (PK... = ZIP/DOCX) para extraerlo</div>
-
-</div>
-<div>
 
 <div class="highlight-box">
 
 **¿Cuál es el primer mensaje?**
 
-Ana lo envía al servidor AOL, no directamente a 192.168.1.159 — el stream pasa por la infraestructura de AIM
+Ana lo envía al servidor AOL — el stream pasa por la infraestructura de AIM
 
-Buscar el paquete con texto legible: *"Here's the secret recipe..."*
+Buscar: *"Here's the secret recipe..."*
 
 </div>
 

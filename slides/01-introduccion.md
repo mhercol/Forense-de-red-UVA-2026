@@ -231,11 +231,13 @@ Sesión 2 (2h): Forense de Red y Caza de Amenazas
 
 <div class="highlight-box">
 
-**Apéndice disponible:** 
+**Apéndice disponible:**
 Está pensado como **referencia para** las sesiones presenciales.
 A. Modelo TCP/IP y encapsulamiento · B. Sistemas de numeración
 C. Formato PCAP / pcapng · D. Herramientas de manipulación de PCAP
-E. Protocolos de capa de enlace y red
+E. Protocolos de capa de enlace y red · F. Filtros Wireshark y TCP
+G. Cabeceras de protocolo · H. Fuentes de captura
+I. NetFlow, Flows e Infraestructura FPC · J. APT Kill Chain — Indicadores de Red
 
 </div>
 
