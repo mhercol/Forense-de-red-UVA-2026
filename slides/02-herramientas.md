@@ -659,7 +659,7 @@ DNS es el protocolo de exfiltración y C2 más usado — todo el tráfico intern
 **DNS sobre HTTPS (DoH / puerto 443):**
 
 <div class="list-item">Mezclado con tráfico HTTPS normal</div>
-<div class="list-item"><strong>Difícil de bloquear sin rompimiento TLS</strong></div>
+<div class="list-item"><strong>Difícil de bloquear sin ruptura de TLS</strong></div>
 <div class="list-item">Usado por malware moderno para evasión</div>
 
 <div class="warn-box">
