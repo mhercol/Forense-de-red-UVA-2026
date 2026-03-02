@@ -808,3 +808,48 @@ Una serie de 200 hacia URLs aleatorias = posible DGA / C2
 
 </div>
 </div>
+
+---
+
+# FTP y SMB — Protocolos con Alto Valor Forense
+
+<div class="cols">
+<div>
+
+## FTP — Canal de control cleartext
+
+<div class="list-item">Puerto <strong>21/tcp</strong> (comandos) + <strong>20/tcp</strong> o efímero (datos)</div>
+<div class="list-item">Comandos en texto claro en el canal de control</div>
+<div class="list-item"><code>STOR</code> = upload hacia el servidor · <code>RETR</code> = descarga</div>
+
+```bash
+# Filtros Wireshark
+ftp                             # canal de control
+ftp-data                        # transferencia de ficheros
+ftp.request.command == "STOR"   # uploads (exfiltración)
+```
+
+</div>
+<div>
+
+## SMB — Compartición de ficheros Windows
+
+<div class="list-item">Puerto <strong>445/tcp</strong> — SMB2/SMB3</div>
+<div class="list-item">Shares admin (<code>C$</code>, <code>admin$</code>, <code>IPC$</code>) = movimiento lateral + exfil</div>
+<div class="list-item">SMB3 cifra el payload → solo metadatos visibles sin clave</div>
+
+```bash
+# Write hacia un share = upload
+smb2.cmd == 9                     # SMB2 Write
+smb2.filename contains "C$"
+smb2.filename contains "admin$"
+```
+
+<div class="warn-box">
+
+FTP a IPs externas desconocidas · SMB fuera de horario · Volumen bytes\_dst >> normal
+
+</div>
+
+</div>
+</div>

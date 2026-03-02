@@ -386,52 +386,6 @@ Si aparece dominio con caracteres aleatorios = **DGA** (Domain Generation Algori
 
 ---
 
-# Exfiltración — FTP y SMB
-
-<div class="cols">
-<div>
-
-## FTP — Canal de control cleartext
-
-<div class="list-item">Puerto <strong>21/tcp</strong> (comandos) + <strong>20/tcp</strong> o efímero (datos)</div>
-<div class="list-item">Comandos en texto claro en el canal de control</div>
-<div class="list-item"><code>STOR</code> = upload hacia el servidor externo</div>
-<div class="list-item"><code>RETR</code> = descarga desde el servidor</div>
-
-```bash
-# Filtros Wireshark
-ftp           # canal de control
-ftp-data      # transferencia de ficheros
-ftp.request.command == "STOR"  # uploads
-```
-
-</div>
-<div>
-
-## SMB — Exfiltración interna (y externa)
-
-<div class="list-item">Puerto <strong>445/tcp</strong> — SMB2/SMB3</div>
-<div class="list-item">Shares admin (<code>C$</code>, <code>admin$</code>) = movimiento lateral + exfil</div>
-<div class="list-item">SMB3 cifrado → solo metadatos visibles</div>
-
-```bash
-# Write hacia un share = upload
-smb2.cmd == 9     # SMB2 Write
-smb2.filename contains "C$"
-smb2.filename contains "admin$"
-```
-
-<div class="warn-box">
-
-FTP a IPs externas desconocidas · SMB fuera de horario · Volumen bytes\_dst >> normal
-
-</div>
-
-</div>
-</div>
-
----
-
 # Flujos de Información (Network Flows)
 
 <div class="center-content">
