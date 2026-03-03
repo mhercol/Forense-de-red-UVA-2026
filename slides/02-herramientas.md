@@ -39,6 +39,9 @@ Dominar Wireshark es fundamental para cualquier analista de red
 ---
 
 # Crear filtros en Wireshark
+<div class="warn-box">
+Solo veeremos una de las tres opciones para hacer filtros de Wireshark. Las otras dos se encuentran en los apéndices
+</div>
 
 <div class="highlight-box">
 
