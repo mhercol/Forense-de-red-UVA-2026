@@ -49,12 +49,17 @@ Solo veeremos una de las tres opciones para hacer filtros de Wireshark. Las otra
 
 </div>
 
-<div class="center-content">
+<div class="cols">
+<div>
 
-![w:620](./images/slide_034_img_33.png)
+![w:300](./images/slide_034_img_33.png)
 
-![w:620](./images/slide_034_img_34.png)
+</div>
+<div>
 
+![w:300](./images/slide_034_img_34.png)
+
+</div>
 </div>
 
 ---
