@@ -35,8 +35,9 @@ Dominar Wireshark es fundamental para cualquier analista de red
 
 </div>
 </div>
+
 ---
----
+
 # Crear filtros en Wireshark
 
 <div class="highlight-box">
