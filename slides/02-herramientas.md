@@ -792,14 +792,14 @@ Regla práctica: si un dominio aparece con **periodicidad fija**, es C2 hasta qu
 
 ```
 Cliente                    Servidor DHCP
-  │                             │
+  │                              │
   │── DHCPDISCOVER (broadcast) ─►│
-  │                             │
-  │◄─── DHCPOFFER (unicast) ────│
-  │                             │
+  │                              │
+  │◄─── DHCPOFFER (unicast) ─────│
+  │                              │
   │── DHCPREQUEST (broadcast) ──►│
-  │                             │
-  │◄───── DHCPACK (unicast) ────│
+  │                              │
+  │◄───── DHCPACK (unicast) ─────│
 ```
 
 **Transporte:** UDP puerto **67** (servidor) / **68** (cliente)
