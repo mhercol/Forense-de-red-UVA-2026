@@ -104,10 +104,11 @@ Solo veremos una de las tres opciones. Las otras dos se encuentran en los apénd
 
 <div class="cols">
   <div>
-    <img src="./images/slide_038_img_43.png" width="400"/>
-  </div>
-  
- <div>
+
+![w:600](./images/slide_036_img_43.png)
+
+</div>
+<div>
 
  **File → Export Objects**
  Wireshark puede reconstituir y exportar objetos:
@@ -118,12 +119,15 @@ Opciones según protocolo:
       <div class="list-item">FTP / TFTP: Archivos transferidos en sesiones FTP/TFTP</div> 
       <div class="list-item">Otros (SMB, CIFS…): Archivos compartidos y artefactos de red</div> 
 
-      <div class="highlight-box">
-        **Tip**: Genera copias de los objetos exportados, nunca modifiques el PCAP original. Esto permite análisis forense posterior y evita corromper evidencia.
-      </div>
+</div>
 
+<div class="highlight-box">
+
+**Tip**: Genera copias de los objetos exportados, nunca modifiques el PCAP original. Esto permite análisis forense posterior y evita corromper evidencia.
 </div>
 </div>
+</div>
+
 ---
 
 # LogiCorp — Apertura del PCAP
