@@ -51,7 +51,7 @@ Dominar Wireshark es fundamental para cualquier analista de red
 <div class="list-item">Muy potentes para buscar dentro del PCAP </div>
 <div class="list-item">Permiten filtrar por campos internos del protocolo</div>
 
-
+</div>
 
 <div class="highlight-box">
 
@@ -69,7 +69,7 @@ Generad una nueva copia "reducida" no sobreescribais el original.
 ![w:400](./images/slide_037_img_42.png)
 
 </div>
-</div>
+
 
 ---
 
