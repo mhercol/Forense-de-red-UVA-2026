@@ -992,8 +992,8 @@ Indicador: dos `DHCPOFFER` con `siaddr` distintos respondiendo al mismo `xid`
 ## DHCP Starvation
 
 <div class="list-item">El atacante lanza muchos DHCPDISCOVER usando MAC falsas</div>
-<div class="list-item">Agota el pool de IPs → <strong>Denegación de Servicio</strong> en la LAN</div>
-<div class="list-item">Preludio habitual antes de lanzar un Rogue DHCP</div>
+<div class="list-item">Agota el pool de IPs → <strong>DoS</strong></div>
+<div class="list-item">Precede normalmente a Rogue DHCP</div>
 
 <div class="warn-box">
 
