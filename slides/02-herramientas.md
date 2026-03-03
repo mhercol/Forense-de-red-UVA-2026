@@ -106,8 +106,8 @@ Solo veremos una de las tres opciones. Las otras dos se encuentran en los apénd
   <div>
     <img src="./images/slide_038_img_43.png" width="400"/>
   </div>
-
-  <div class="text-img">
+  
+  <div>
     <div>
 
       <span class="strong">File → Export Objects</span>
