@@ -339,8 +339,11 @@ Filtrar fragmentos con offsets inusuales o tamaños extraños
 Correlacionar con otros eventos TCP/UDP para patrones sospechosos
 
 </div>
+
 </div>
+
 </div>
+
 </div>
 
 ---
