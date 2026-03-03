@@ -950,7 +950,7 @@ Sin logs DHCP históricos con timestamps, la atribución IP→usuario es **impos
 
 <div>
       
-**Valor forense:**
+# Valor forense
 
 <div class="list-item">Detectar un dispositivo <strong>no autorizado</strong> en la red</div>
 <div class="list-item-sub">Ej: Raspberry Pi o dispositivo IoT sin inventariar</div>
