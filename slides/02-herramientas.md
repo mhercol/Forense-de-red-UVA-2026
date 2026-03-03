@@ -113,10 +113,10 @@ Solo veremos una de las tres opciones. Las otras dos se encuentran en los apénd
  Wireshark puede reconstituir y exportar objetos:
 Opciones según protocolo:
 
-      <div class="list-item"><span class="strong">HTTP:</span> Reconstituye páginas, imágenes, documentos, binarios</div> 
-      <div class="list-item"><span class="strong">SMTP / POP3 / IMAP (IMF):</span> Extrae correos completos y adjuntos</div> 
-      <div class="list-item"><span class="strong">FTP / TFTP:</span> Archivos transferidos en sesiones FTP/TFTP</div> 
-      <div class="list-item"><span class="strong">Otros (SMB, CIFS…):</span> Archivos compartidos y artefactos de red</div> 
+      <div class="list-item">HTTP: Reconstituye páginas, imágenes, documentos, binarios</div> 
+      <div class="list-item">SMTP / POP3 / IMAP (IMF): Extrae correos completos y adjuntos</div> 
+      <div class="list-item">FTP / TFTP: Archivos transferidos en sesiones FTP/TFTP</div> 
+      <div class="list-item">Otros (SMB, CIFS…): Archivos compartidos y artefactos de red</div> 
 
       <div class="highlight-box">
         **Tip**: Genera copias de los objetos exportados, nunca modifiques el PCAP original. Esto permite análisis forense posterior y evita corromper evidencia.
