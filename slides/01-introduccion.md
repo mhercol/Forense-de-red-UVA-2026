@@ -368,7 +368,11 @@ I. NetFlow, Flows e Infraestructura FPC · J. APT Kill Chain — Indicadores de 
 ---
 
 # El Desafío Zero Trust (ZT)
+<div class="highlight-box">
 
+Zero Trust es el modelo de seguridad actual que asume que nada dentro ni fuera de la red es confiable por defecto y exige autenticación, autorización y cifrado continuo para cada comunicación.
+
+</div>
 ```
 Cifrado Everywhere
   mTLS y TLS 1.3 ocultan el payload incluso internamente
@@ -383,7 +387,7 @@ Estrategia: SSLKEYLOGFILE
   Recolección de llaves en endpoints para descifrado
 ```
 
-<div class="highlight-box">
+<div class="warn-box">
 
 **Desafío 2025**: El 80% del tráfico interno corporativo está cifrado
 
