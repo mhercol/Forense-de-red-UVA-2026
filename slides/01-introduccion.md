@@ -659,41 +659,5 @@ BPF se puede usar para cribar el tráfico que se guardara en el PCAP, una vez se
 
 ---
 
-# Wireshark - La herramienta esencial
 
-<div class="cols">
-<div>
-
-**Wireshark**
-
-<div class="list-item">Herramienta <strong>principal</strong> para análisis de red</div>
-<div class="list-item"><strong>Open source</strong></div>
-<div class="list-item">GUI completa e intuitiva</div>
-
-**Características:**
-
-<div class="list-item">[OK] Excelente parseo de protocolos</div>
-<div class="list-item">[OK] Filtros potentes</div>
-<div class="list-item">[OK] Búsqueda de cadenas de texto</div>
-<div class="list-item">[OK] Exportación (archivos, objetos HTTP, descifrado)</div>
-
-</div>
-<div>
-
-<div class="list-item">[OK] Estadísticas detalladas</div>
-<div class="list-item">[OK] Datos expertos (Expert Info)</div>
-<div class="list-item">[OK] Información sobre protocolos</div>
-<div class="list-item">[OK] Análisis de conversaciones</div>
-<div class="list-item">[OK] Seguimiento de streams (TCP, UDP, HTTP)</div>
-
-<div class="highlight-box">
-
-**Tip:**
-Dominar Wireshark es fundamental para cualquier analista de red
-
-</div>
-
-</div>
-</div>
----
 
