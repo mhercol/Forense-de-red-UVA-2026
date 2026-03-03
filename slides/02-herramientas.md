@@ -122,7 +122,6 @@ Wireshark puede reconstituir y exportar objetos:
 </div>
 </div>
 
-
 ---
 
 # LogiCorp — Apertura del PCAP
