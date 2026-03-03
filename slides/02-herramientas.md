@@ -103,6 +103,7 @@ Solo veremos una de las tres opciones. Las otras dos se encuentran en los apénd
 
 # Exportar objetos de Wireshark
 
+<div class="cols">
 <div class="text-img">
 <div>
 
@@ -121,8 +122,8 @@ Opciones según protocolo:
 <div class="highlight-box"> **Tip:** Genera copias de los objetos exportados, nunca modifiques el PCAP original. Esto permite análisis forense posterior y evita corromper evidencia. </div> </div> <div>
 
 </div>
-<div>
 
+<div>
 ![w:400](./images/slide_038_img_43.png)
 
 </div>
