@@ -240,13 +240,6 @@ Abrir → Investigar → Filtrar → Limpiar → Abrir de nuevo
 
 </div>
 
-<div class="highlight-box">
-
-**Detección en Wireshark:**
-
-`arp.duplicate-address-detected` o múltiples MACs para la misma IP
-
-</div>
 </div>
 
 <div>
@@ -268,6 +261,14 @@ Abrir → Investigar → Filtrar → Limpiar → Abrir de nuevo
 
 </div>
 
+<div class="highlight-box">
+
+**Detección en Wireshark:**
+
+`arp.duplicate-address-detected` o múltiples MACs para la misma IP
+
+</div>
+
 </div>
 
 ---
@@ -283,7 +284,7 @@ Abrir → Investigar → Filtrar → Limpiar → Abrir de nuevo
 <div class="list-item">~4.300 millones de direcciones</div>
 <div class="list-item">RFC 791</div>
 
-![w:320](./images/slide_048_img_50.png)
+![w:400](./images/slide_048_img_50.png)
 
 </div>
 <div>
@@ -294,7 +295,7 @@ Abrir → Investigar → Filtrar → Limpiar → Abrir de nuevo
 <div class="list-item">340 undecillones de direcciones</div>
 <div class="list-item">RFC 2460, RFC 4291</div>
 
-![w:320](./images/slide_048_img_51.png)
+![w:400](./images/slide_048_img_51.png)
 
 </div>
 </div>
@@ -444,6 +445,7 @@ tcp.analysis.flags
 <div class="warn-box">
 
 Muchos SYN hacia distintos puertos desde la misma IP = reconocimiento activo
+Muchos SYN hacia el mismo puerto en la misma IP = DoS
 
 </div>
 
