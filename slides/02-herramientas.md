@@ -229,15 +229,6 @@ Abrir → Investigar → Filtrar → Limpiar → Abrir de nuevo
 <div class="list-item"><strong>Request</strong>: broadcast — "¿Quién tiene 10.0.0.2?"</div>
 <div class="list-item"><strong>Reply</strong>: unicast — "10.0.0.2 está en AA:BB:CC:..."</div>
 
-<div class="highlight-box">
-
-**Señal de alerta:**
-
-Múltiples IPs anunciando la misma MAC — o la misma IP con MACs distintas — es la firma del ARP spoofing
-
-`arp.duplicate-address-detected`
-
-</div>
 
 </div>
 </div>
@@ -266,9 +257,6 @@ Múltiples IPs anunciando la misma MAC — o la misma IP con MACs distintas — 
 <div class="list-item">Permite capturar o modificar tráfico</div>
 
 </div>
-<div>
-
-![w:400](./images/slide_045_img_49.png)
 
 <div class="highlight-box">
 
@@ -279,6 +267,13 @@ Múltiples IPs anunciando la misma MAC — o la misma IP con MACs distintas — 
 </div>
 
 </div>
+
+<div>
+
+![w:400](./images/slide_045_img_49.png)
+
+</div>
+
 </div>
 
 ---
