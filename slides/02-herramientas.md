@@ -456,6 +456,8 @@ tcp.analysis.flags
 
 </div>
 
+</div>
+
 <div class="warn-box">
 
 Muchos SYN hacia distintos puertos desde la misma IP = reconocimiento activo
@@ -463,7 +465,6 @@ Muchos SYN hacia el mismo puerto en la misma IP = DoS
 
 </div>
 
-</div>
 </div>
 
 ---
@@ -501,13 +502,15 @@ tcp.time_relative > 300
 
 </div>
 
+</div>
+
 <div class="warn-box">
 
 Muchos RST hacia el mismo host = escaneo activo o herramienta de ataque detectada
 
 </div>
 
-</div>
+
 </div>
 
 ---
