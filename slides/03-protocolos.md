@@ -180,7 +180,6 @@ Antes de abrir el PCAP, documentamos: hash SHA-256, hora de descarga, nombre del
 
 # Análisis Forense de Red — Las 6 Preguntas
 
-<div class="cols">
 <div>
 
 **El forense de red examina el tráfico que ha atravesado la red y lo correlaciona con actividad anómala para responder:**
@@ -690,7 +689,7 @@ El PCAP es el "ground truth" — cuando el SIEM duda, el PCAP tiene la respuesta
 ## Servidores DHCP
 
 <div class="list-item">Asignan IP dinámicamente a equipos de la LAN</div>
-<div class="list-item">**La investigación suele comenzar con una IP**</div>
+<div class="list-item">La investigación suele comenzar con una IP</div>
 <div class="list-item">Los logs DHCP contienen:</div>
 <div class="list-item-sub">Timestamp de la petición</div>
 <div class="list-item-sub">IP asignada y duración del lease</div>
@@ -709,7 +708,7 @@ IP → MAC → hostname → usuario (vía AD)
 ## Servidores DNS
 
 <div class="list-item">Resuelven nombres para todos los equipos internos</div>
-<div class="list-item">**Log de peticiones recibidas:**</div>
+<div class="list-item">Log de peticiones recibidas:</div>
 <div class="list-item-sub">Intentos de conexión interior → exterior</div>
 <div class="list-item-sub">Timestamps de cada resolución</div>
 <div class="list-item-sub">Permite crear la **timeline** de actividad sospechosa</div>
