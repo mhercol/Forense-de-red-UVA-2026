@@ -135,27 +135,27 @@ Para el tipo de escaneo: filtrar SYN sin ACK de respuesta → **TCP SYN (half-op
 # Lab 3 — Tipos de escaneo de puertos
 
 <div class="list-item">
-<strong>TCP Connect:</strong> Completa el 3-way handshake, dejando registros claros en logs y siendo fácil de detectar.
+<strong>TCP Connect:</strong> Completa el 3-way handshake. Fácil de detectar.
 </div>
 
 <div class="list-item">
-<strong>SYN Stealth:</strong> Envía solo el SYN y corta con RST tras recibir SYN/ACK, evitando completar la conexión para ser menos visible.
+<strong>SYN Stealth:</strong> Envía solo el SYN y corta con RST tras recibir SYN/ACK. Menos visible.
 </div>
 
 <div class="list-item">
-<strong>ACK Scan:</strong> Envía paquetes con flag ACK para identificar reglas de firewall sin comprobar realmente si el puerto está abierto.
+<strong>ACK Scan:</strong> Envía paquetes con flag ACK para identificar reglas de firewall.
 </div>
 
 <div class="list-item">
-<strong>XMAS Scan:</strong> Usa flags FIN+PSH+URG y analiza la ausencia de respuesta en puertos abiertos para evadir detección tradicional.
+<strong>XMAS Scan:</strong> Usa muchas flags y analiza la respuesta en puertos abiertos para evadir detección tradicional.
 </div>
 
 <div class="list-item">
-<strong>UDP Scan:</strong> Envía datagramas UDP vacíos y asume puerto abierto si no hay respuesta ICMP, lo que dificulta su detección.
+<strong>UDP Scan:</strong> Envía datagramas UDP vacíos y asume puerto abierto si no hay respuesta ICMP.
 </div>
 
 <div class="list-item">
-<strong>NULL Scan:</strong> Envía paquetes TCP sin flags activadas y deduce el estado del puerto según si recibe o no un RST.
+<strong>NULL Scan:</strong> Envía paquetes TCP sin flags activadas y deduce el estado según si recibe o no un RST.
 </div>
 
 | Tipo | Flags TCP | Respuesta abierto | Detección |

@@ -8,9 +8,9 @@
 
 **¿Qué encontramos en los PCAPs?**
 
-<div class="list-item">Lab 1: <code>recipe.docx</code> transferida por AIM desde <code>Sec558user1</code> (Ana)</div>
-<div class="list-item">Lab 2: Ann Dercover usa <code>sneakyg33k@aol.com</code> para coordinar cita en Playa del Carmen con <code>mistersecretx@aol.com</code></div>
-<div class="list-item">Lab 3: Escaneo TCP SYN desde <code>10.42.42.253</code> — Windows en <code>.50</code> (puertos 135, 139), Apple en <code>.25</code></div>
+<div class="list-item">Lab 1: Ana exfiltró <code>recipe.docx</code> usando AIM </div>
+<div class="list-item">Lab 2: Ana usa <code>sneakyg33k@aol.com</code> para coordinar cita en Playa del Carmen con <code>mistersecretx@aol.com</code></div>
+<div class="list-item">Lab 3: Hay un escaneo TCP SYN desde <code>10.42.42.253</code> — Windows en <code>.50</code> (puertos 135, 139), Apple en <code>.25</code></div>
 <div class="list-item">Lab 4: <code>Stewie-PC</code> infectado vía <code>www.homeimprovement.com</code> → exploit kit → <strong>ransomware</strong></div>
 
 **Herramientas que usamos:**
@@ -26,7 +26,8 @@
 
 **Conclusión forense:**
 
-Insider threat (Ana + Ann) filtró la receta secreta y coordinó un encuentro externo. Paralelamente, un equipo corporativo (`Stewie-PC`, `172.16.4.193`) fue infectado con ransomware tras visitar un sitio comprometido.
+Insider threat (Ana) filtró la receta secreta y coordinó un encuentro externo. Paralelamente, un equipo corporativo (`Stewie-PC`, `172.16.4.193`) fue infectado con ransomware tras visitar un sitio comprometido.
+Estos dos incidentes no tienen por qué estar relacionados. 
 
 **IOCs del Lab 4:**
 - Servidor malware: `194.87.234.129`

@@ -195,9 +195,7 @@ style: |
 <div class="list-item">Ingeniero de Telecomunicación</div>
 <div class="list-item"><strong>Responsable de Seguridad de red</strong> - EEAS (Bruselas) (2021-Actualidad)</div>
 <div class="list-item"><strong>Analista de SOC</strong> - Consejo de la UE (Bruselas) (2017-2021)</div>
-<div class="list-item"><strong>Consultor de ciberseguridad</strong> - Empresas financieras (2015-2019)</div>
-<div class="list-item"><strong>Técnico de ciberseguridad</strong> - Incibe (2011-2017)</div>
-<div class="list-item"><strong>Ingeniero de Red 3G/4G</strong> - Datatronics (2008-2011)</div>
+<div class="list-item">Formación avanzada en DFIR y redes <strong>(GCFA, GSEC, GMON, ECIH)  </strong> </div>
 
 Correo: mhercol[@]gmail[.]com
 
