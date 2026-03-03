@@ -319,21 +319,27 @@ Abrir → Investigar → Filtrar → Limpiar → Abrir de nuevo
 <div class="list-item"><strong>Flag M</strong>: "More Fragments" — activo en todos salvo el último</div>
 
 </div>
+
 <div>
 
-![w:380](./images/slide_050_img_54.png)
+**Ataques basados en fragmentacion IP**
+
+<div class="list-item"><strong>Evasión de IDS/IPS:</strong> Fragmentos divididos para que los sistemas solo inspeccionen el primer fragmento y pasen por alto la amenaza</div> 
+<div class="list-item"><strong>Teardrop / Overlap:</strong> Fragmentos mal formados con offsets superpuestos → posibles DoS o explotación de vulnerabilidades</div>
+<div class="list-item"><strong>Exfiltración lenta:</strong> Fragmentos pequeños y frecuentes para exfiltrar datos sin levantar alertas</div>
+<div class="list-item"><strong>Ocultación de payloads:</strong> Malware y C2 dividen comandos en fragmentos IP para evitar inspección profunda</div> 
+<div class="list-item"><strong>DoS por fragmentación:</strong> Saturación del reensamblado con gran cantidad de fragmentos</div> </div> <div>
 
 <div class="highlight-box">
 
 **Forense:**
 
-La fragmentación puede usarse para evadir IDS que solo inspeccionan el primer fragmento.
-Cada fragmento tiene su propio encabezado IP, por lo que reconstruir la sesión completa es esencial para no perder información.
-Fragmentos inusuales o frecuentes pueden indicar túneles de exfiltración o malware.
-La captura parcial de fragmentos puede comprometer la validez del análisis forense, así que siempre hay que verificar integridad del PCAP.
+Reconstruir todos los fragmentos antes de analizar
+Filtrar fragmentos con offsets inusuales o tamaños extraños
+Correlacionar con otros eventos TCP/UDP para patrones sospechosos
 
 </div>
-
+</div>
 </div>
 </div>
 
