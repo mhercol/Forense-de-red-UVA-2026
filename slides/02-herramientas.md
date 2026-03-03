@@ -106,20 +106,19 @@ Solo veremos una de las tres opciones. Las otras dos se encuentran en los apénd
 <div class="text-img">
 <div>
 
-**File → Export Objects → HTTP**
+**File → Export Objects**
 
-Wireshark puede **reconstituir y exportar** objetos HTTP:
+Wireshark puede **reconstituir y exportar** objetos:
 
-<div class="list-item">Páginas HTML</div>
-<div class="list-item">Imágenes descargadas</div>
-<div class="list-item">Binarios / ejecutables</div>
-<div class="list-item">Documentos (PDF, Office...)</div>
+<div class="text-img"> <div>
 
-<div class="highlight-box">
+Opciones según protocolo:
 
-Se guardan para análisis forense posterior
-
-</div>
+<div class="list-item"><strong>HTTP:</strong> Reconstituye páginas, imágenes, documentos, binarios</div> 
+<div class="list-item"><strong>SMTP / POP3 / IMAP (IMF):</strong> Extrae correos completos y adjuntos</div> 
+<div class="list-item"><strong>FTP / TFTP:</strong> Archivos transferidos en sesiones FTP/TFTP</div> 
+<div class="list-item"><strong>Otros (SMB, CIFS…):</strong> Archivos compartidos y artefactos de red</div> 
+<div class="highlight-box"> **Tip:** Genera copias de los objetos exportados, nunca modifiques el PCAP original. Esto permite análisis forense posterior y evita corromper evidencia. </div> </div> <div>
 
 </div>
 <div>
