@@ -229,7 +229,6 @@ Abrir → Investigar → Filtrar → Limpiar → Abrir de nuevo
 # Problemas de ARP
 
 <div class="cols">
-<div>
 
 <div class="warn-box">
 
@@ -240,6 +239,7 @@ Abrir → Investigar → Filtrar → Limpiar → Abrir de nuevo
 <div class="list-item">Todos los equipos actualizan su caché al recibir ARP</div>
 
 </div>
+
 <div class="highlight-box">
 
 **Detección en Wireshark:**
@@ -248,7 +248,9 @@ Abrir → Investigar → Filtrar → Limpiar → Abrir de nuevo
 
 </div>
 </div>
+
 <div>
+
 
 **ARP Spoofing / Poisoning:**
 
