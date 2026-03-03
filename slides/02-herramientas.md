@@ -925,7 +925,6 @@ Sin logs DHCP históricos con timestamps, la atribución IP→usuario es **impos
 
 # DHCP — Fingerprinting de Dispositivos
 
-<div class="cols">
 <div>
 
 **¿Qué es el DHCP fingerprinting?**
@@ -945,8 +944,12 @@ Sin logs DHCP históricos con timestamps, la atribución IP→usuario es **impos
 | `1,121,3,6,15,119,252,95,44` | iOS |
 
 </div>
-<div>
 
+
+---
+
+<div>
+      
 **Valor forense:**
 
 <div class="list-item">Detectar un dispositivo <strong>no autorizado</strong> en la red</div>
