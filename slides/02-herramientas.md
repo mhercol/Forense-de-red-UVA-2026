@@ -146,19 +146,20 @@ IT nos entrega el PCAP del firewall perimetral de las últimas 4 horas. Lo prime
 **Filtros iniciales aplicados:**
 
 <div class="list-item"><code>dns</code> — aislamos todas las consultas de nombres</div>
-<div class="list-item"><code>ip.src == 10.10.1.45</code> — solo tráfico de DESKTOP-MK3</div>
+<div class="list-item"><code>ip.src == 10.10.1.45</code> — solo tráfico de un host</div>
 <div class="list-item"><code>tcp.port == 443 && ip.dst != 10.0.0.0/8</code> — HTTPS saliente</div>
+<div class="list-item"><code>dns.qry.name.length > 20 && dns.flags.response == 0</code> DNS sospechosos DGA</div>
 
 </div>
 <div>
 
 <div class="highlight-box">
 
-**Primer hallazgo:**
+**Caso hipotético:**
 
-Al aislar DNS, aparecen consultas repetidas al mismo dominio desconocido — exactamente cada 60 segundos.
+Al analizar DNS, aparecen consultas repetidas a un mismo dominio — exactamente cada 60 segundos.
 
-Pasamos al módulo de protocolos para entender qué estamos viendo.
+Qué nos indica este comportamiento?
 
 </div>
 
