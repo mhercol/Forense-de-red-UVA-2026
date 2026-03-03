@@ -130,13 +130,13 @@ Wireshark puede reconstituir y exportar objetos:
 
 ---
 
-# LogiCorp — Apertura del PCAP
+# LogiCorp — Apertura de un PCAP
 
 <div class="warn-box">
 
 **En el caso de LogiCorp:**
-
-IT nos entrega el PCAP del firewall perimetral de las últimas 4 horas. Lo primero es orientarse sin perdernos en los miles de paquetes.
+Cuando hay sospecha de un incidente y se analiza un PCAP, hay mucho ruido. 
+Lo primero es orientarse sin perdernos en los miles de paquetes.
 
 </div>
 
@@ -159,9 +159,9 @@ IT nos entrega el PCAP del firewall perimetral de las últimas 4 horas. Lo prime
 
 Al analizar DNS, aparecen consultas repetidas a un mismo dominio — exactamente cada 60 segundos.
 
-¿Qué técnica de C2 puede estar usando esto?
-
 </div>
+
+¿Qué técnica de C2 puede estar usando esto?
 
 </div>
 </div>
