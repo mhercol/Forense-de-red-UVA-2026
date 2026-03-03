@@ -261,7 +261,7 @@ Abrir → Investigar → Filtrar → Limpiar → Abrir de nuevo
 
 <div>
 
-![w:400](./images/slide_045_img_49.png)
+![w:800](./images/slide_045_img_49.png)
 
 </div>
 
