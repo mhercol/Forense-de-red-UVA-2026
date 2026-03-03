@@ -252,7 +252,7 @@ Abrir → Investigar → Filtrar → Limpiar → Abrir de nuevo
 **ARP Spoofing / Poisoning:**
 
 <div class="list-item">Un atacante envía ARP Replies falsos</div>
-<div class="list-item">Redirige tráfico hacia sí mismo → <strong>MITM</strong></div>
+<div class="list-item">Redirige tráfico hacia sí mismo → <strong>MITM (Machine In The Middle)</strong></div>
 <div class="list-item">Permite capturar o modificar tráfico</div>
 
 </div>
