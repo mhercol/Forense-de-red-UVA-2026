@@ -297,10 +297,10 @@ I. NetFlow, Flows e Infraestructura FPC · J. APT Kill Chain — Indicadores de 
 
 **Evidencias recibidas:**
 
-<div class="list-item"><code>Evidencia01.pcap</code> — tráfico de la red WiFi corporativa</div>
-<div class="list-item"><code>Evidencia02.pcap</code> — tráfico SMTP capturado en el gateway</div>
-<div class="list-item"><code>Evidencia03.pcap</code> — captura del segmento de red interno</div>
-<div class="list-item"><code>Evidencia04.pcap</code> — sesión de navegación del equipo infectado</div>
+<div class="list-item"><code>Evidencia01.pcap</code> — tráfico de la red WiFi</div>
+<div class="list-item"><code>Evidencia02.pcap</code> — tráfico saliente en el gateway</div>
+<div class="list-item"><code>Evidencia03.pcap</code> — tráfico de segmento interno</div>
+<div class="list-item"><code>Evidencia04.pcap</code> — tráfico de un host</div>
 
 </div>
 
@@ -309,9 +309,9 @@ I. NetFlow, Flows e Infraestructura FPC · J. APT Kill Chain — Indicadores de 
 **Fases de la investigación:**
 
 <div class="list-item">¿Cómo se exfiltró el activo crítico?</div>
-<div class="list-item">¿Se usó email para coordinar con el exterior?</div>
+<div class="list-item">¿Cómo fue la coordinación con el exterior?</div>
 <div class="list-item">¿Qué sistemas fueron reconocidos internamente?</div>
-<div class="list-item">¿Cómo entró el malware en Stewie-PC?</div>
+<div class="list-item">¿Qué pasó en el host?</div>
 
 </div>
 
@@ -339,14 +339,14 @@ I. NetFlow, Flows e Infraestructura FPC · J. APT Kill Chain — Indicadores de 
 </div>
 <div>
 
-## Acceso al Dato
+## Cómo se captura el tráfico
 
 <div class="highlight-box">
 
 **TAP (Test Access Point)**
 
 <div class="list-item">[OK] Copia física</div>
-<div class="list-item">[OK] Infalible</div>
+<div class="list-item">[OK] Muy fiable</div>
 <div class="list-item">[X] Costoso</div>
 
 **SPAN/Mirror Port**
@@ -359,6 +359,8 @@ I. NetFlow, Flows e Infraestructura FPC · J. APT Kill Chain — Indicadores de 
 
 <div class="list-item">VPC Flow Logs</div>
 <div class="list-item">Virtual TAPs</div>
+<div class="list-item">Puede disparar el coste</div>
+
 
 </div>
 
@@ -407,10 +409,10 @@ Estrategia: SSLKEYLOGFILE
 
 **Formato más común: libpcap**
 
-<div class="list-item">[OK] Open source</div>
-<div class="list-item">[OK] Disponible en *nix y Windows</div>
-<div class="list-item">[OK] Librería en C</div>
-<div class="list-item">[OK] Módulos en muchos lenguajes</div>
+<div class="list-item">Open source</div>
+<div class="list-item">Disponible en *nix y Windows</div>
+<div class="list-item">Librería en C</div>
+<div class="list-item">Módulos en muchos lenguajes</div>
 
 </div>
 <div>
@@ -423,7 +425,7 @@ Estrategia: SSLKEYLOGFILE
 <div class="list-item">Debugging de red</div>
 <div class="list-item">Análisis de malware</div>
 <div class="list-item">Respuesta a incidentes</div>
-<div class="list-item">Entrenamiento y educación</div>
+<div class="list-item">Cursos y formacion</div>
 
 </div>
 
@@ -459,7 +461,7 @@ Estrategia: SSLKEYLOGFILE
 
 <div class="list-item">Perseguir malware</div>
 <div class="list-item">Recopilar evidencias</div>
-<div class="list-item">Timeline reconstruction</div>
+<div class="list-item">Recreacion del timeline del incidente</div>
 
 </div>
 </div>
@@ -471,17 +473,18 @@ Estrategia: SSLKEYLOGFILE
 <div class="text-img">
 <div>
 
-**La herramienta de captura más usada**
+**La herramienta de captura más extendida**
 
-<div class="list-item">[OK] Open Source</div>
-<div class="list-item">[OK] Multiplataforma</div>
-<div class="list-item">[OK] Basada en libpcap</div>
+<div class="list-item">Open Source</div>
+<div class="list-item">Multiplataforma</div>
+<div class="list-item">Basada en libpcap</div>
 
 **Características:**
 
 <div class="list-item">Usa sintaxis <strong>BPF</strong> (Berkeley Packet Filter)</div>
 <div class="list-item">Muestra detalles en terminal o guarda en pcap</div>
 <div class="list-item">Lee de la red o de un pcap existente</div>
+<div class="list-item">Muchas veces el único recurso disponible (sin GUI)</div>
 
 </div>
 <div>
@@ -514,6 +517,7 @@ tcpdump -r captura.pcap
 
 <div class="list-item">Línea de comandos</div>
 <div class="list-item">Captura desde interfaz de red</div>
+<div class="list-item">Puede leer y escribir archivos</div>
 
 **Wireshark**
 
@@ -536,8 +540,8 @@ tcpdump -r captura.pcap
 **Libtins**
 
 <div class="list-item">Librería C++</div>
-<div class="list-item">Más rápida que libpcap</div>
-<div class="list-item">Para procesamiento masivo</div>
+<div class="list-item">Alto rendimiento en C++</div>
+<div class="list-item">Permite captura y manipulación estructurada de paquetes</div>
 
 </div>
 </div>
@@ -572,7 +576,7 @@ tcpdump -i eth0 -w archivo.pcap \
   'host 10.10.10.1 and tcp port 443'
 ```
 
-![w:400](./images/slide_029_img_17.png)
+![w:400](./images/slide_025_img_17.png)
 
 </div>
 </div>
@@ -632,7 +636,7 @@ tcp and (port 80 or port 443)
 
 ---
 
-# BPF - Filtros por tamaño y flags
+# BPF - Capacidad de filtrado
 
 ```
 Filtra por tamaño del paquete
@@ -640,64 +644,18 @@ Filtra por tamaño del paquete
   ▸ 'len <= 64'  ->  Paquetes pequeños (SYN, RST, DNS)
   ▸ 'len > 1400'  ->  Paquetes grandes (datos HTTP, exfiltración)
 
-Filtra UDP/IP de origen hacia direcciones privadas
-
-  ▸ 'udp[8:2] > 10 && ip[16:4] <= 0xC0A80000'
-
 Captura solo paquetes TCP con SYN (handshakes)
 
   ▸ 'tcp[13] & 2 != 0'
+En la cabecera TCP el byte 13 contiene los flags y el flag SYN corresponde al bit con valor 2 (0x02)
 
-Paquetes con carga útil HTTP (método GET/POST)
+Paquetes con carga útil HTTP (método GET)
 
   ▸ 'tcp[((tcp[12:1] & 0xf0) >> 2):4] = 0x47455420'
-```
-
----
-
-# BPF - Detección de amenazas
+Calcula dónde empieza el payload TCP y compara los primeros 4 bytes con 'GET ' para detectar peticiones HTTP.
 
 ```
-Captura paquetes con User-Agent sospechoso
-
-  ▸ 'tcp[((tcp[12:1] & 0xf0) >> 2):11] = "curl"'
-
-Tráfico TLS con certificate exchange
-
-  ▸ 'tcp[((tcp[12:1] & 0xf0) >> 2):1] = 0x16 && \
-     tcp[((tcp[12:1] & 0xf0) >> 2)+5:1] = 0x0b'
-
-Paquetes con TTL bajo (posible IP spoofing)
-
-  ▸ 'ip[8] < 10'
-
-Filtra RST inmediatos tras SYN (port scan)
-
-  ▸ 'tcp[13] = 0x14 && len = 40'
-```
-
----
-
-# BPF - Filtros avanzados
-
-```
-Paquetes UDP con payload superior a 100 bytes
-
-  ▸ 'udp && len > 100'
-
-Paquetes ICMP con código de error
-
-  ▸ 'icmp[0] = 3 || icmp[0] = 11'
-
-Tráfico a puertos no estándar (evasión)
-
-  ▸ 'tcp dst portrange 1024-65535 && \
-     tcp[((tcp[12:1] & 0xf0) >> 2):4] = 0x504f5354'
-
-Fragmentos IP (posible ataque de fragmentación)
-
-  ▸ 'ip[6:2] & 0x1fff != 0'
-```
+BPF se puede usar para cribar el tráfico que se guardara en el PCAP, una vez se tienen indicios del incidente. 
 
 ---
 
@@ -737,3 +695,4 @@ Dominar Wireshark es fundamental para cualquier analista de red
 
 </div>
 </div>
+---
