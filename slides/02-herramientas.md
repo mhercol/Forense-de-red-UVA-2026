@@ -192,7 +192,7 @@ Abrir → Investigar → Filtrar → Limpiar → Abrir de nuevo
 <div class="img-text">
 <div>
 
-![w:350](./images/slide_044_img_46.png)
+![w:600](./images/slide_044_img_46.png)
 
 </div>
 <div>
