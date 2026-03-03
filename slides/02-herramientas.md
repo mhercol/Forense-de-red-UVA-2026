@@ -104,7 +104,9 @@ Solo veremos una de las tres opciones. Las otras dos se encuentran en los apénd
 
 <div class="cols">
 <div>
+      
 ![w:400](./images/slide_038_img_43.png)
+
 </div>
 
 <div>
