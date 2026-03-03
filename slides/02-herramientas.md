@@ -979,9 +979,9 @@ Sin logs DHCP históricos con timestamps, la atribución IP→usuario es **impos
 
 ## Rogue DHCP Server
 
-<div class="list-item">El atacante levanta su propio servidor DHCP en la LAN</div>
+<div class="list-item">El atacante inicia su propio servidor DHCP</div>
 <div class="list-item">Asigna su propia IP como <strong>default gateway o DNS</strong></div>
-<div class="list-item">Obtiene posición de <strong>Man-in-the-Middle</strong> sin ARP spoofing</div>
+<div class="list-item">Obtiene posición de <strong>MITM</strong></div>
 
 <div class="warn-box">
 
@@ -991,7 +991,7 @@ Indicador: dos `DHCPOFFER` con `siaddr` distintos respondiendo al mismo `xid`
 
 ## DHCP Starvation
 
-<div class="list-item">El atacante inunda el servidor con `DHCPDISCOVER` usando MACs falsas</div>
+<div class="list-item">El atacante lanza muchos DHCPDISCOVER usando MAC falsas</div>
 <div class="list-item">Agota el pool de IPs → <strong>Denegación de Servicio</strong> en la LAN</div>
 <div class="list-item">Preludio habitual antes de lanzar un Rogue DHCP</div>
 
