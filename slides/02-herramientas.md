@@ -38,32 +38,6 @@ Dominar Wireshark es fundamental para cualquier analista de red
 
 ---
 
-# Crear filtros en Wireshark
-<div class="warn-box">
-Solo veeremos una de las tres opciones para hacer filtros de Wireshark. Las otras dos se encuentran en los apéndices
-</div>
-
-<div class="highlight-box">
-
-**Opción 1:** Barra de filtros — sintaxis directa con **autocompletar**
-
-</div>
-
-<div class="cols">
-<div>
-
-![w:300](./images/slide_034_img_33.png)
-
-</div>
-<div>
-
-![w:300](./images/slide_034_img_34.png)
-
-</div>
-</div>
-
----
-
 # Filtros de lectura (Display Filters)
 
 <div class="cols">
@@ -82,6 +56,7 @@ Solo veeremos una de las tres opciones para hacer filtros de Wireshark. Las otra
 `Capture Filter` = filtra durante la captura (BPF)
 
 `Display Filter` = filtra la vista del archivo ya capturado
+Mucho más potentes para buscar dentro del PCAP y permiten filtrar por campos internos del protocolo.
 
 </div>
 
@@ -94,6 +69,34 @@ Solo veeremos una de las tres opciones para hacer filtros de Wireshark. Las otra
 </div>
 
 ---
+
+# Crear filtros en Wireshark
+<div class="warn-box">
+Solo veremos una de las tres opciones. Las otras dos se encuentran en los apéndices
+</div>
+
+<div class="highlight-box">
+
+**Opción 1:** Barra de filtros — sintaxis directa con **autocompletar**
+
+</div>
+
+<div class="cols">
+<div>
+
+![w:300](./images/slide_034_img_33.png)
+Barra de filtros de Wireshark 
+
+</div>
+<div>
+
+![w:300](./images/slide_034_img_34.png)
+Autocompletado y sugerencias
+</div>
+</div>
+
+---
+
 
 # Exportar objetos de Wireshark
 
