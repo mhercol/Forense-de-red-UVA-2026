@@ -216,12 +216,12 @@ Abrir → Investigar → Filtrar → Limpiar → Abrir de nuevo
 
 # ARP — En Wireshark
 
-<div class="img-text">
 <div>
 
 ![w:600](./images/slide_044_img_46.png)
 
 </div>
+
 <div>
 
 **Flujo observable en Wireshark:**
