@@ -159,7 +159,7 @@ IT nos entrega el PCAP del firewall perimetral de las últimas 4 horas. Lo prime
 
 Al analizar DNS, aparecen consultas repetidas a un mismo dominio — exactamente cada 60 segundos.
 
-Qué nos indica este comportamiento?
+¿Qué técnica de C2 puede estar usando esto?
 
 </div>
 
