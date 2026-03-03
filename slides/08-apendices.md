@@ -1,6 +1,15 @@
+---
 
+# Apéndices — Network Forensics
+
+<div class="center-content">
+
+## Material para profundizar o recordar
+
+</div>
 
 ---
+
 
 # A. Modelo TCP/IP
 <div class="text-img">
@@ -965,3 +974,4 @@ APTs sofisticados operan durante **meses** antes de la detección — la retenci
 
 </div>
 </div>
+---
