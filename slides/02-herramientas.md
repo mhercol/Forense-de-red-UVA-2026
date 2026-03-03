@@ -111,8 +111,7 @@ Solo veremos una de las tres opciones. Las otras dos se encuentran en los apénd
 
  **File → Export Objects**
  Wireshark puede reconstituir y exportar objetos:
-
-      Opciones según protocolo:
+Opciones según protocolo:
 
       <div class="list-item"><span class="strong">HTTP:</span> Reconstituye páginas, imágenes, documentos, binarios</div> 
       <div class="list-item"><span class="strong">SMTP / POP3 / IMAP (IMF):</span> Extrae correos completos y adjuntos</div> 
@@ -123,8 +122,6 @@ Solo veremos una de las tres opciones. Las otras dos se encuentran en los apénd
         **Tip**: Genera copias de los objetos exportados, nunca modifiques el PCAP original. Esto permite análisis forense posterior y evita corromper evidencia.
       </div>
 
-    </div>
-  </div>
 </div>
 
 ---
