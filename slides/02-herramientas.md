@@ -393,6 +393,83 @@ Correlacionar con otros eventos TCP/UDP para patrones sospechosos
 
 ---
 
+# ICMP — Internet Control Message Protocol
+
+<div class="cols">
+<div>
+
+**Propósito:**
+
+<div class="list-item">Reportar errores <strong>no temporales</strong> de la red</div>
+<div class="list-item">Intercambiar información de control simple</div>
+
+**Casos de uso:**
+
+<div class="list-item">Fragmentación necesaria pero DF=1</div>
+<div class="list-item">Puerto inalcanzable (destino no responde)</div>
+<div class="list-item"><strong>Ping</strong> (Echo Request / Echo Reply)</div>
+<div class="list-item">TTL Exceeded (traceroute)</div>
+
+</div>
+<div>
+
+<div class="warn-box">
+
+**Habitual bloquearlo en redes corporativas:**
+
+<div class="list-item">Dificulta el descubrimiento de la red</div>
+<div class="list-item">Anula PMTUD → puede generar problemas de red</div>
+
+</div>
+
+<div class="highlight-box">
+
+**Forense:**
+
+Los mensajes de error ICMP **incluyen parte del paquete original** que causó el error → revelan información de sesiones internas
+
+</div>
+
+</div>
+</div>
+
+---
+
+# ICMP Echo Request / Reply (PING)
+
+<div class="cols">
+<div>
+
+**Estructura:**
+
+<div class="list-item"><strong>Mismo identificador</strong> en request y reply</div>
+<div class="list-item">Diferentes <strong>números de secuencia</strong> por envío</div>
+<div class="list-item">Permite controlar paquetes perdidos y latencia</div>
+
+**Uso malicioso:**
+
+<div class="list-item"><strong>ICMP Tunneling</strong> — exfiltración de datos en el payload ICMP</div>
+<div class="list-item">Reconocimiento de red (ping sweep)</div>
+<div class="list-item">Fragmentación maliciosa (Ping of Death)</div>
+
+</div>
+<div>
+
+<div class="highlight-box">
+
+**Detección en Wireshark:**
+
+Filtro: `icmp.type == 8` (request)
+
+Payload ICMP anormalmente grande = sospechoso
+
+</div>
+
+</div>
+</div>
+
+---
+
 # TCP vs UDP
 
 <div class="cols">
@@ -556,82 +633,6 @@ Diseñados en una era sin modelo de seguridad → son vectores de ataque habitua
 </div>
 </div>
 
----
-
-# ICMP — Internet Control Message Protocol
-
-<div class="cols">
-<div>
-
-**Propósito:**
-
-<div class="list-item">Reportar errores <strong>no temporales</strong> de la red</div>
-<div class="list-item">Intercambiar información de control simple</div>
-
-**Casos de uso:**
-
-<div class="list-item">Fragmentación necesaria pero DF=1</div>
-<div class="list-item">Puerto inalcanzable (destino no responde)</div>
-<div class="list-item"><strong>Ping</strong> (Echo Request / Echo Reply)</div>
-<div class="list-item">TTL Exceeded (traceroute)</div>
-
-</div>
-<div>
-
-<div class="warn-box">
-
-**Habitual bloquearlo en redes corporativas:**
-
-<div class="list-item">Dificulta el descubrimiento de la red</div>
-<div class="list-item">Anula PMTUD → puede generar problemas de red</div>
-
-</div>
-
-<div class="highlight-box">
-
-**Forense:**
-
-Los mensajes de error ICMP **incluyen parte del paquete original** que causó el error → revelan información de sesiones internas
-
-</div>
-
-</div>
-</div>
-
----
-
-# ICMP Echo Request / Reply (PING)
-
-<div class="cols">
-<div>
-
-**Estructura:**
-
-<div class="list-item"><strong>Mismo identificador</strong> en request y reply</div>
-<div class="list-item">Diferentes <strong>números de secuencia</strong> por envío</div>
-<div class="list-item">Permite controlar paquetes perdidos y latencia</div>
-
-**Uso malicioso:**
-
-<div class="list-item"><strong>ICMP Tunneling</strong> — exfiltración de datos en el payload ICMP</div>
-<div class="list-item">Reconocimiento de red (ping sweep)</div>
-<div class="list-item">Fragmentación maliciosa (Ping of Death)</div>
-
-</div>
-<div>
-
-<div class="highlight-box">
-
-**Detección en Wireshark:**
-
-Filtro: `icmp.type == 8` (request)
-
-Payload ICMP anormalmente grande = sospechoso
-
-</div>
-
-</div>
-</div>
 
 ---
 
