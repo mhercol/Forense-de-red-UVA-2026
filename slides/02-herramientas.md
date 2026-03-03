@@ -284,7 +284,7 @@ Abrir → Investigar → Filtrar → Limpiar → Abrir de nuevo
 <div class="list-item">~4.300 millones de direcciones</div>
 <div class="list-item">RFC 791</div>
 
-![w:400](./images/slide_048_img_50.png)
+![w:600](./images/slide_048_img_50.png)
 
 </div>
 <div>
@@ -295,7 +295,7 @@ Abrir → Investigar → Filtrar → Limpiar → Abrir de nuevo
 <div class="list-item">340 undecillones de direcciones</div>
 <div class="list-item">RFC 2460, RFC 4291</div>
 
-![w:400](./images/slide_048_img_51.png)
+![w:600](./images/slide_048_img_51.png)
 
 </div>
 </div>
@@ -327,7 +327,10 @@ Abrir → Investigar → Filtrar → Limpiar → Abrir de nuevo
 
 **Forense:**
 
-La fragmentación puede usarse para evadir IDS que solo inspeccionan el primer fragmento
+La fragmentación puede usarse para evadir IDS que solo inspeccionan el primer fragmento.
+Cada fragmento tiene su propio encabezado IP, por lo que reconstruir la sesión completa es esencial para no perder información.
+Fragmentos inusuales o frecuentes pueden indicar túneles de exfiltración o malware.
+La captura parcial de fragmentos puede comprometer la validez del análisis forense, así que siempre hay que verificar integridad del PCAP.
 
 </div>
 
