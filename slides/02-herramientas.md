@@ -164,14 +164,14 @@ Al analizar DNS, aparecen consultas repetidas a un mismo dominio — exactamente
 ¿Qué técnica de C2 puede estar usando esto?
 
 </div>
-
+</div>
 <div class="highlight-box">
 
 Abrir → Investigar → Filtrar → Limpiar → Abrir de nuevo
 
 </div>
 
-</div>
+
 
 ---
 
@@ -219,7 +219,7 @@ Abrir → Investigar → Filtrar → Limpiar → Abrir de nuevo
 <div class="img-text">
 <div>
 
-![w:400](./images/slide_044_img_46.png)
+![w:600](./images/slide_044_img_46.png)
 
 </div>
 <div>
