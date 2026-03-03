@@ -318,6 +318,16 @@ Abrir → Investigar → Filtrar → Limpiar → Abrir de nuevo
 <div class="list-item"><strong>Offset</strong>: posición del fragmento (múltiplo de 8)</div>
 <div class="list-item"><strong>Flag M</strong>: "More Fragments" — activo en todos salvo el último</div>
 
+<div class="highlight-box">
+
+**Forense:**
+
+Reconstruir todos los fragmentos antes de analizar
+Filtrar fragmentos con offsets inusuales o tamaños extraños
+Correlacionar con otros eventos TCP/UDP para patrones sospechosos
+
+</div>
+
 </div>
 
 <div>
@@ -330,15 +340,7 @@ Abrir → Investigar → Filtrar → Limpiar → Abrir de nuevo
 <div class="list-item"><strong>Ocultación de payloads:</strong> Malware y C2 dividen comandos en fragmentos IP para evitar inspección profunda</div> 
 <div class="list-item"><strong>DoS por fragmentación:</strong> Saturación del reensamblado con gran cantidad de fragmentos</div> 
 
-<div class="highlight-box">
 
-**Forense:**
-
-Reconstruir todos los fragmentos antes de analizar
-Filtrar fragmentos con offsets inusuales o tamaños extraños
-Correlacionar con otros eventos TCP/UDP para patrones sospechosos
-
-</div>
 
 </div>
 
