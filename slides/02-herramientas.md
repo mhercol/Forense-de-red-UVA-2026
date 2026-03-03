@@ -66,7 +66,7 @@ Generad una nueva copia "reducida" no sobreescribais el original.
 </div>
 <div>
 
-![w:400](./images/slide_037_img_42.png)
+![w:600](./images/slide_037_img_42.png)
 
 </div>
 
@@ -87,14 +87,14 @@ Solo veremos una de las tres opciones. Las otras dos se encuentran en los apénd
 <div class="cols">
 <div>
 
-![w:300](./images/slide_034_img_33.png)
-Barra de filtros de Wireshark 
+![w:400](./images/slide_034_img_33.png)
+<div class="center-content">Barra de filtros de Wireshark</div>
 
 </div>
 <div>
 
-![w:300](./images/slide_034_img_34.png)
-Autocompletado y sugerencias
+![w:400](./images/slide_034_img_34.png)
+<div class="center-content">Autocompletado y sugerencias</div>
 </div>
 </div>
 
