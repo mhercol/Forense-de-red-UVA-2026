@@ -103,16 +103,13 @@ Solo veremos una de las tres opciones. Las otras dos se encuentran en los apénd
 # Exportar objetos de Wireshark
 
 <div class="cols">
-  <div>
-
-![w:400](./images/slide_036_img_43.png)
-
+<div>
+![w:400](./images/slide_038_img_43.png)
 </div>
 
 <div>
- **File → Export Objects**
- Wireshark puede reconstituir y exportar objetos:
-Opciones según protocolo:
+   **File → Export Objects**
+Wireshark puede reconstituir y exportar objetos:
 
       <div class="list-item">HTTP: Reconstituye páginas, imágenes, documentos, binarios</div> 
       <div class="list-item">SMTP / POP3 / IMAP (IMF): Extrae correos completos y adjuntos</div> 
