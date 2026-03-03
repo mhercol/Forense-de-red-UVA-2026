@@ -328,7 +328,7 @@ Abrir → Investigar → Filtrar → Limpiar → Abrir de nuevo
 <div class="list-item"><strong>Teardrop / Overlap:</strong> Fragmentos mal formados con offsets superpuestos → posibles DoS o explotación de vulnerabilidades</div>
 <div class="list-item"><strong>Exfiltración lenta:</strong> Fragmentos pequeños y frecuentes para exfiltrar datos sin levantar alertas</div>
 <div class="list-item"><strong>Ocultación de payloads:</strong> Malware y C2 dividen comandos en fragmentos IP para evitar inspección profunda</div> 
-<div class="list-item"><strong>DoS por fragmentación:</strong> Saturación del reensamblado con gran cantidad de fragmentos</div> </div> <div>
+<div class="list-item"><strong>DoS por fragmentación:</strong> Saturación del reensamblado con gran cantidad de fragmentos</div> 
 
 <div class="highlight-box">
 
