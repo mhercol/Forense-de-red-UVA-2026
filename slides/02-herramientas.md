@@ -108,7 +108,7 @@ Solo veremos una de las tres opciones. Las otras dos se encuentran en los apénd
   </div>
   
  <div>
- <div>
+
  **File → Export Objects**
  Wireshark puede reconstituir y exportar objetos:
 
