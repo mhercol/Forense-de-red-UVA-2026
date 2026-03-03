@@ -62,7 +62,7 @@ Se puede reducir un PCAP enorme, usando tcpdump o tshark para generar un subset 
 Generad una nueva copia "reducida" no sobreescribais el original. 
 
 </div>
-
+</div>
 </div>
 <div>
 
