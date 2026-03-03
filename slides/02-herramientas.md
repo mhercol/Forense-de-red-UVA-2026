@@ -218,19 +218,10 @@ Abrir → Investigar → Filtrar → Limpiar → Abrir de nuevo
 
 <div>
 
-![w:600](./images/slide_044_img_46.png)
+![w:800](./images/slide_044_img_46.png)
 
 </div>
 
-<div>
-
-**Flujo observable en Wireshark:**
-
-<div class="list-item"><strong>Request</strong>: broadcast — "¿Quién tiene 10.0.0.2?"</div>
-<div class="list-item"><strong>Reply</strong>: unicast — "10.0.0.2 está en AA:BB:CC:..."</div>
-
-
-</div>
 </div>
 
 ---
@@ -249,20 +240,20 @@ Abrir → Investigar → Filtrar → Limpiar → Abrir de nuevo
 <div class="list-item">Todos los equipos actualizan su caché al recibir ARP</div>
 
 </div>
+<div class="highlight-box">
+
+**Detección en Wireshark:**
+
+`arp.duplicate-address-detected` o múltiples MACs para la misma IP
+
+</div>
+</div>
 
 **ARP Spoofing / Poisoning:**
 
 <div class="list-item">Un atacante envía ARP Replies falsos</div>
 <div class="list-item">Redirige tráfico hacia sí mismo → <strong>MITM</strong></div>
 <div class="list-item">Permite capturar o modificar tráfico</div>
-
-</div>
-
-<div class="highlight-box">
-
-**Detección en Wireshark:**
-
-`arp.duplicate-address-detected` o múltiples MACs para la misma IP
 
 </div>
 
