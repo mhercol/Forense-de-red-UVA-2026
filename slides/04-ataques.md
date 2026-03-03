@@ -19,7 +19,7 @@
          beaconing │                  │                 │                 │
                    │                  │                 │                 │
 [7] Actions     ───┼──────────────────┼─────────────────┼────────────────►│ DC / files
-    Lateral mvmt   │                  │                 │  SMB, RDP      │ exfil
+    Lateral mvmt   │                  │                 │  SMB, RDP       │ exfil
 ─────────────────────────────────────────────────────────────────────────────────────────
   [2] Weaponization — offline, sin traza de red
 ```
