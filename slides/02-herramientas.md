@@ -130,11 +130,11 @@ Wireshark puede reconstituir y exportar objetos:
 
 ---
 
-# LogiCorp — Apertura de un PCAP
+# Apertura de un PCAP
 
 <div class="warn-box">
 
-**En el caso de LogiCorp:**
+**En caso de intervención:**
 Cuando hay sospecha de un incidente y se analiza un PCAP, hay mucho ruido. 
 Lo primero es orientarse sin perdernos en los miles de paquetes.
 
@@ -164,6 +164,13 @@ Al analizar DNS, aparecen consultas repetidas a un mismo dominio — exactamente
 ¿Qué técnica de C2 puede estar usando esto?
 
 </div>
+
+<div class="highlight-box">
+
+Abrir → Investigar → Filtrar → Limpiar → Abrir de nuevo
+
+</div>
+
 </div>
 
 ---
