@@ -100,33 +100,33 @@ Solo veremos una de las tres opciones. Las otras dos se encuentran en los apénd
 
 ---
 
-
 # Exportar objetos de Wireshark
 
 <div class="cols">
-<div class="text-img">
-<div>
+  <div>
+    <img src="./images/slide_038_img_43.png" width="400"/>
+  </div>
 
-**File → Export Objects**
+  <div class="text-img">
+    <div>
 
-Wireshark puede **reconstituir y exportar** objetos:
+      <span class="strong">File → Export Objects</span>
 
-<div class="text-img"> <div>
+      Wireshark puede <span class="strong">reconstituir y exportar</span> objetos:
 
-Opciones según protocolo:
+      Opciones según protocolo:
 
-<div class="list-item"><strong>HTTP:</strong> Reconstituye páginas, imágenes, documentos, binarios</div> 
-<div class="list-item"><strong>SMTP / POP3 / IMAP (IMF):</strong> Extrae correos completos y adjuntos</div> 
-<div class="list-item"><strong>FTP / TFTP:</strong> Archivos transferidos en sesiones FTP/TFTP</div> 
-<div class="list-item"><strong>Otros (SMB, CIFS…):</strong> Archivos compartidos y artefactos de red</div> 
-<div class="highlight-box"> **Tip:** Genera copias de los objetos exportados, nunca modifiques el PCAP original. Esto permite análisis forense posterior y evita corromper evidencia. </div> </div> <div>
+      <div class="list-item"><span class="strong">HTTP:</span> Reconstituye páginas, imágenes, documentos, binarios</div> 
+      <div class="list-item"><span class="strong">SMTP / POP3 / IMAP (IMF):</span> Extrae correos completos y adjuntos</div> 
+      <div class="list-item"><span class="strong">FTP / TFTP:</span> Archivos transferidos en sesiones FTP/TFTP</div> 
+      <div class="list-item"><span class="strong">Otros (SMB, CIFS…):</span> Archivos compartidos y artefactos de red</div> 
 
-</div>
+      <div class="highlight-box">
+        <span class="strong">Tip:</span> Genera copias de los objetos exportados, nunca modifiques el PCAP original. Esto permite análisis forense posterior y evita corromper evidencia.
+      </div>
 
-<div>
-![w:400](./images/slide_038_img_43.png)
-
-</div>
+    </div>
+  </div>
 </div>
 
 ---
