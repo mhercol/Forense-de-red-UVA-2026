@@ -109,7 +109,7 @@ Solo veremos una de las tres opciones. Las otras dos se encuentran en los apénd
   
  <div>
  <div>
- File → Export Objects</div>
+ **File → Export Objects**
  Wireshark puede reconstituir y exportar objetos:
 
       Opciones según protocolo:
@@ -120,7 +120,7 @@ Solo veremos una de las tres opciones. Las otras dos se encuentran en los apénd
       <div class="list-item"><span class="strong">Otros (SMB, CIFS…):</span> Archivos compartidos y artefactos de red</div> 
 
       <div class="highlight-box">
-        Tip: Genera copias de los objetos exportados, nunca modifiques el PCAP original. Esto permite análisis forense posterior y evita corromper evidencia.
+        **Tip**: Genera copias de los objetos exportados, nunca modifiques el PCAP original. Esto permite análisis forense posterior y evita corromper evidencia.
       </div>
 
     </div>
