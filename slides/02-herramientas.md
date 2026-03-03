@@ -48,15 +48,18 @@ Dominar Wireshark es fundamental para cualquier analista de red
 <div class="list-item">Solo aparecen los paquetes que cumplen las condiciones</div>
 <div class="list-item">Útil para <strong>reducir PCAPs grandes</strong></div>
 <div class="list-item">No destruye datos — se puede quitar el filtro</div>
+<div class="list-item">Muy potentes para buscar dentro del PCAP </div>
+<div class="list-item">Permiten filtrar por campos internos del protocolo</div>
+
+
 
 <div class="highlight-box">
 
 **Diferencia clave:**
-
-`Capture Filter` = filtra durante la captura (BPF)
-
 `Display Filter` = filtra la vista del archivo ya capturado
-Mucho más potentes para buscar dentro del PCAP y permiten filtrar por campos internos del protocolo.
+`Capture Filter` = filtra durante la captura (BPF)
+Se puede reducir un PCAP enorme, usando tcpdump o tshark para generar un subset antes de abrirlo en Wireshark. 
+Generad una nueva copia "reducida" no sobreescribais el original. 
 
 </div>
 
