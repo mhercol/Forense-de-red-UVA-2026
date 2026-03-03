@@ -114,10 +114,10 @@ Solo veremos una de las tres opciones. Las otras dos se encuentran en los apénd
 **File → Export Objects**
 Wireshark puede reconstituir y exportar objetos:
 
-      <div class="list-item">HTTP: Reconstituye páginas, imágenes, documentos, binarios</div> 
-      <div class="list-item">SMTP / POP3 / IMAP (IMF): Extrae correos completos y adjuntos</div> 
-      <div class="list-item">FTP / TFTP: Archivos transferidos en sesiones FTP/TFTP</div> 
-      <div class="list-item">Otros (SMB, CIFS…): Archivos compartidos y artefactos de red</div> 
+<div class="list-item">HTTP: Reconstituye páginas, imágenes, documentos, binarios</div>
+<div class="list-item">SMTP / POP3 / IMAP (IMF): Extrae correos completos y adjuntos</div>
+<div class="list-item">FTP / TFTP: Archivos transferidos en sesiones FTP/TFTP</div>
+<div class="list-item">Otros (SMB, CIFS…): Archivos compartidos y artefactos de red</div>
 
 
 <div class="highlight-box">
