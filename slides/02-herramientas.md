@@ -123,7 +123,7 @@ Opciones según protocolo:
       </div>
 
 </div>
-
+</div>
 ---
 
 # LogiCorp — Apertura del PCAP
