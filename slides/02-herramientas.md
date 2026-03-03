@@ -110,6 +110,7 @@ Solo veremos una de las tres opciones. Las otras dos se encuentran en los apénd
 </div>
 
 <div>
+      
 **File → Export Objects**
 Wireshark puede reconstituir y exportar objetos:
 
@@ -120,8 +121,11 @@ Wireshark puede reconstituir y exportar objetos:
 
 
 <div class="highlight-box">
+      
 **Tip**: Genera copias de los objetos exportados, nunca modifiques el PCAP original. Esto permite análisis forense posterior y evita corromper evidencia.
+
 </div>
+
 </div>
 
 ---
