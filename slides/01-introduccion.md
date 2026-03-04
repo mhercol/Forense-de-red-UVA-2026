@@ -191,11 +191,10 @@ style: |
 
 **Miguel Herrero Collantes**
 
-<div class="list-item">Ingeniero técnico de telecomunicación - Sistemas electrónicos</div>
-<div class="list-item">Ingeniero de Telecomunicación</div>
+<div class="list-item">Ingeniero de telecomunicación </div>
 <div class="list-item"><strong>Responsable de Seguridad de red</strong> - EEAS (Bruselas) (2021-Actualidad)</div>
 <div class="list-item"><strong>Analista de SOC</strong> - Consejo de la UE (Bruselas) (2017-2021)</div>
-<div class="list-item">Formación avanzada en DFIR y redes <strong>(GCFA, GDSA, GMON, ECIH)  </strong> </div>
+<div class="list-item">Formación avanzada en DFIR y redes <strong>(GCFA, GDSA, GMON, ECIH)</strong> </div>
 
 Correo: mhercol[@]gmail[.]com
 
