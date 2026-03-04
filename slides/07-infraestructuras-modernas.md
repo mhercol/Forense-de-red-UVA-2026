@@ -123,11 +123,11 @@ visibilidad de red, namespaces, overlay, mTLS
 
 **Capas de red involucradas:**
 
-<div class="list-item"><strong>eth0 del pod** — interfaz virtual dentro del namespace de red del contenedor</div>
-<div class="list-item"><strong>veth pair** — cable virtual entre el pod y el nodo host</div>
-<div class="list-item"><strong>bridge/CNI** — plugin de red: Flannel, Calico, Cilium, Weave</div>
-<div class="list-item"><strong>NIC física del nodo** — tráfico encapsulado (VXLAN, Geneve, IP-in-IP)</div>
-<div class="list-item"><strong>kube-proxy / eBPF** — balanceo de servicios (iptables o eBPF según CNI)</div>
+<div class="list-item"><strong>eth0 del pod</strong> — interfaz virtual dentro del namespace de red del contenedor</div>
+<div class="list-item"><strong>veth pair</strong> — cable virtual entre el pod y el nodo host</div>
+<div class="list-item"><strong>bridge/CNI</strong> — plugin de red: Flannel, Calico, Cilium, Weave</div>
+<div class="list-item"><strong>NIC física del nodo</strong> — tráfico encapsulado (VXLAN, Geneve, IP-in-IP)</div>
+<div class="list-item"><strong>kube-proxy / eBPF</strong> — balanceo de servicios (iptables o eBPF según CNI)</div>
 
 ```
 [Pod A] ──veth──► [cbr0 bridge] ──VXLAN──► [Nodo B] ──veth──► [Pod B]
