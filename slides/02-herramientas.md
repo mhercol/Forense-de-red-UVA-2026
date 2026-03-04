@@ -212,10 +212,7 @@ Abrir → Investigar → Filtrar → Limpiar → Abrir de nuevo
 </div>
 </div>
 
----
-
-# ARP — En Wireshark
-
+**ARP — En Wireshark**
 <div>
 
 ![w:800](./images/slide_044_img_46.png)
