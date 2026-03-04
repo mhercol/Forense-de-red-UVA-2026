@@ -107,45 +107,49 @@ forma secuencial en el paquete
 
 ---
 
+---
+
 # A. Capas encapsuladas en Wireshark
 
 <div class="cols">
 
- <div class="text-img">
+<div>
 
-**Visualización secuencial:**
+## Visualización secuencial
 
-Las capas están formadas por bytes que aparecen de forma secuencial en el paquete
+Las capas aparecen **encapsuladas y ordenadas por bytes** dentro del paquete.
 
-<div class="list-item"><strong>Datos HTTP</strong></div>
+<div class="list-item"><strong>Datos (HTTP)</strong></div>
 <div class="list-item"><strong>Cabecera TCP</strong></div>
 <div class="list-item"><strong>Cabecera IP</strong></div>
 <div class="list-item"><strong>Cabecera Ethernet</strong></div>
 
+<br>
+
 <div class="highlight-box">
 
-**Estructura completa del paquete:**
+<strong>Estructura del paquete:</strong>
 
-<div class="list-item">Cada byte tiene su posición específica</div>
-<div class="list-item">Los colores ayudan a identificar capas</div>
-<div class="list-item">La interpretación depende del protocolo detectado</div>
-<div class="list-item">Validar siempre en la vista hexadecimal</div>
+<div class="list-item">Cada byte tiene posición exacta</div>
+<div class="list-item">Wireshark colorea por protocolo</div>
+<div class="list-item">La decodificación depende del dissector</div>
+<div class="list-item">Validar siempre en vista hexadecimal</div>
 
 </div>
+
 </div>
 
 <div>
 
-![w:500](./images/slide_009_img_9.png)
+![w:550](./images/slide_009_img_9.png)
 
-![w:500](./images/slide_009_img_10.png)
+![w:550](./images/slide_009_img_10.png)
 
-![w:500](./images/slide_009_img_12.png)
-
-</div>
+![w:550](./images/slide_009_img_12.png)
 
 </div>
 
+</div>
 ---
 
 # B. Decimal — Binario — Hexadecimal
