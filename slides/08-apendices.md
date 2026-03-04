@@ -132,14 +132,15 @@ Las capas están formadas por bytes que aparecen de forma secuencial en el paque
 <div class="list-item">Validar siempre en la vista hexadecimal</div>
 
 </div>
+</div>
 
 <div>
 
-![w:400](./images/slide_009_img_9.png)
+![w:500](./images/slide_009_img_9.png)
 
-![w:400](./images/slide_009_img_10.png)
+![w:500](./images/slide_009_img_10.png)
 
-![w:350](./images/slide_009_img_12.png)
+![w:500](./images/slide_009_img_12.png)
 
 </div>
 
