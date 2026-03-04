@@ -971,6 +971,7 @@ Cada fase deja huellas distintas — el PCAP es el registro completo de la activ
 APTs sofisticados operan durante **meses** antes de la detección — la retención de flows históricos es crítica
 
 </div>
+---
 
 </div>
 </div>
