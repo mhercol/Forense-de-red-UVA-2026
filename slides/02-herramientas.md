@@ -224,8 +224,6 @@ Abrir → Investigar → Filtrar → Limpiar → Abrir de nuevo
 
 </div>
 
----
-
 # Problemas de ARP
 
 <div class="cols">
