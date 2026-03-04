@@ -123,11 +123,11 @@ visibilidad de red, namespaces, overlay, mTLS
 
 **Capas de red involucradas:**
 
-<div class="list-item">**eth0 del pod** — interfaz virtual dentro del namespace de red del contenedor</div>
-<div class="list-item">**veth pair** — cable virtual entre el pod y el nodo host</div>
-<div class="list-item">**bridge/CNI** — plugin de red: Flannel, Calico, Cilium, Weave</div>
-<div class="list-item">**NIC física del nodo** — tráfico encapsulado (VXLAN, Geneve, IP-in-IP)</div>
-<div class="list-item">**kube-proxy / eBPF** — balanceo de servicios (iptables o eBPF según CNI)</div>
+<div class="list-item"><strong>eth0 del pod** — interfaz virtual dentro del namespace de red del contenedor</div>
+<div class="list-item"><strong>veth pair** — cable virtual entre el pod y el nodo host</div>
+<div class="list-item"><strong>bridge/CNI** — plugin de red: Flannel, Calico, Cilium, Weave</div>
+<div class="list-item"><strong>NIC física del nodo** — tráfico encapsulado (VXLAN, Geneve, IP-in-IP)</div>
+<div class="list-item"><strong>kube-proxy / eBPF** — balanceo de servicios (iptables o eBPF según CNI)</div>
 
 ```
 [Pod A] ──veth──► [cbr0 bridge] ──VXLAN──► [Nodo B] ──veth──► [Pod B]
@@ -193,10 +193,10 @@ nsenter -t <PID_del_pod> -n -- tcpdump -i eth0 -w /tmp/captura.pcap
 
 **CNI plugins y sus implicaciones forenses:**
 
-<div class="list-item">**Flannel** — VXLAN simple, fácil de descifrar manualmente</div>
-<div class="list-item">**Calico** — IP-in-IP o BGP nativo, más eficiente, misma opacidad</div>
-<div class="list-item">**Cilium** — eBPF nativo, ofrece su propio plano de observabilidad (Hubble)</div>
-<div class="list-item">**Weave** — cifrado opcional del overlay (añade otra capa de opacidad)</div>
+<div class="list-item"><strong>Flannel</strong> — VXLAN simple, fácil de descifrar manualmente</div>
+<div class="list-item"><strong>Calico</strong> — IP-in-IP o BGP nativo, más eficiente, misma opacidad</div>
+<div class="list-item"><strong>Cilium</strong> — eBPF nativo, ofrece su propio plano de observabilidad (Hubble)</div>
+<div class="list-item"><strong>Weave</strong> — cifrado opcional del overlay (añade otra capa de opacidad)</div>
 
 ---
 
@@ -222,10 +222,10 @@ No hay un único punto de terminación TLS (como un proxy inverso). Las claves e
 
 **Estrategias de visibilidad:**
 
-<div class="list-item">**Envoy access logs** — el sidecar registra conexiones (IP, puerto, L7 si hay permiso)</div>
-<div class="list-item">**Istio telemetry API** — exporta métricas y trazas a Prometheus/Jaeger</div>
-<div class="list-item">**Captura en el sidecar** — `kubectl exec` en el contenedor `istio-proxy` para tcpdump antes del cifrado</div>
-<div class="list-item">**Mutual TLS certs** — los certificados de corta vida (SVID con SPIFFE) son trazables por identidad de workload, no por IP</div>
+<div class="list-item"><strong>Envoy access logs</strong> — el sidecar registra conexiones (IP, puerto, L7 si hay permiso)</div>
+<div class="list-item"><strong>Istio telemetry API</strong> — exporta métricas y trazas a Prometheus/Jaeger</div>
+<div class="list-item"><strong>Captura en el sidecar</strong> — `kubectl exec` en el contenedor `istio-proxy` para tcpdump antes del cifrado</div>
+<div class="list-item"><strong>Mutual TLS certs</strong> — los certificados de corta vida (SVID con SPIFFE) son trazables por identidad de workload, no por IP</div>
 
 ```bash
 # Captura en el sidecar Envoy (tráfico pre-mTLS):
