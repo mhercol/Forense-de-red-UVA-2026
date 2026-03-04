@@ -640,9 +640,9 @@ sha256sum /mnt/evidencia/**/* > /mnt/evidencia/hashes.txt
 
 **Regla de oro en contenedores:**
 
----
-
 La evidencia es **efímera** — capturar antes de que el pod desaparezca. Automatizar la respuesta con Falco + hooks de preservación de evidencia.
 
 </div>
 </div>
+
+---
