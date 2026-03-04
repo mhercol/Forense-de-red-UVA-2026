@@ -508,10 +508,10 @@ rules:
 
 **Indicadores de compromiso en audit logs:**
 
-<div class="list-item">**`pods/exec`** a pods en producción desde IPs no habituales</div>
-<div class="list-item">Creación de **ClusterRoleBinding** privilegiado fuera de ventana de mantenimiento</div>
-<div class="list-item">Acceso masivo a **secrets** desde una SA que normalmente no los lee</div>
-<div class="list-item">**`pods/portforward`** a puertos internos — posible tunelización de tráfico</div>
+<div class="list-item"><strong>`pods/exec`</strong> a pods en producción desde IPs no habituales</div>
+<div class="list-item">Creación de <strong>ClusterRoleBinding</strong> privilegiado fuera de ventana de mantenimiento</div>
+<div class="list-item">Acceso masivo a <strong>secrets</strong> desde una SA que normalmente no los lee</div>
+<div class="list-item"><strong>`pods/portforward`</strong> a puertos internos — posible tunelización de tráfico</div>
 
 ---
 
@@ -522,12 +522,12 @@ rules:
 
 **Fuentes disponibles en entornos contenerizados:**
 
-<div class="list-item">**Kubernetes audit logs** — quién hizo qué en el plano de control</div>
-<div class="list-item">**Hubble/eBPF flows** — qué tráfico de red hubo entre pods</div>
-<div class="list-item">**Falco alerts** — qué syscalls/comportamientos anómalos ocurrieron</div>
-<div class="list-item">**Container runtime logs** — qué imagen, cuándo se inició, variables de entorno</div>
-<div class="list-item">**OverlayFS / docker export** — qué archivos se crearon o modificaron</div>
-<div class="list-item">**PCAP (nsenter/ksniff)** — tráfico de red en bruto si se capturó a tiempo</div>
+<div class="list-item"><strong></strong>Kubernetes audit logs</strong> — quién hizo qué en el plano de control</div>
+<div class="list-item"><strong>Hubble/eBPF flows</strong> — qué tráfico de red hubo entre pods</div>
+<div class="list-item"><strong>Falco alerts</strong> — qué syscalls/comportamientos anómalos ocurrieron</div>
+<div class="list-item"><strong>Container runtime logs</strong> — qué imagen, cuándo se inició, variables de entorno</div>
+<div class="list-item"><strong>OverlayFS / docker export</strong> — qué archivos se crearon o modificaron</div>
+<div class="list-item"><strong>PCAP (nsenter/ksniff)</strong> — tráfico de red en bruto si se capturó a tiempo</div>
 
 </div>
 <div>
