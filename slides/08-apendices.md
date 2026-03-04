@@ -109,6 +109,8 @@ forma secuencial en el paquete
 
 # A. Capas encapsuladas en Wireshark
 
+<div class="cols">
+ <div>
 <div class="text-img">
 <div>
 
@@ -122,27 +124,6 @@ Las capas están formadas por bytes que aparecen de forma secuencial en el paque
 <div class="list-item"><strong>Cabecera Ethernet</strong></div>
 
 </div>
-<div>
-
-![w:400](./images/slide_009_img_9.png)
-
-![w:400](./images/slide_009_img_10.png)
-
-</div>
-</div>
-
----
-
-# A. Capas encapsuladas en Wireshark
-
-<div class="cols">
-<div>
-
-![w:350](./images/slide_009_img_12.png)
-
-</div>
-<div>
-
 <div class="highlight-box">
 
 **Estructura completa del paquete:**
@@ -153,6 +134,15 @@ Las capas están formadas por bytes que aparecen de forma secuencial en el paque
 <div class="list-item">Validar siempre en la vista hexadecimal</div>
 
 </div>
+</div>
+<div>
+<div>
+
+![w:400](./images/slide_009_img_9.png)
+
+![w:400](./images/slide_009_img_10.png)
+
+![w:350](./images/slide_009_img_12.png)
 
 </div>
 </div>
@@ -241,8 +231,11 @@ Las primeras 4 palabras de 2 bytes de la cabecera UDP son siempre puerto origen,
 
 <div class="img-text">
 <div>
+```bash
 
 ![w:450](./images/slide_018_img_14.png)
+
+```
 
 </div>
 <div>
