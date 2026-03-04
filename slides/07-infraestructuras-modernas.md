@@ -12,8 +12,8 @@
  │                                                     │
  │   Todo lo que hemos visto hasta ahora aplica        │
  │   a la infraestructura tradicional. Las empresas    │
- │   ahora mismo trabajan mas en entornos cloud        │
- │   y basandose en contenedores y microservicios.     │
+ │   ahora mismo trabajan más en entornos cloud        │
+ │   y basándose en contenedores y microservicios.     │
  │                                                     │
  │                                                     │
  └─────────────────────────────────────────────────────┘
@@ -522,7 +522,7 @@ rules:
 
 **Fuentes disponibles en entornos contenerizados:**
 
-<div class="list-item"><strong></strong>Kubernetes audit logs</strong> — quién hizo qué en el plano de control</div>
+<div class="list-item"><strong>Kubernetes audit logs</strong> — quién hizo qué en el plano de control</div>
 <div class="list-item"><strong>Hubble/eBPF flows</strong> — qué tráfico de red hubo entre pods</div>
 <div class="list-item"><strong>Falco alerts</strong> — qué syscalls/comportamientos anómalos ocurrieron</div>
 <div class="list-item"><strong>Container runtime logs</strong> — qué imagen, cuándo se inició, variables de entorno</div>

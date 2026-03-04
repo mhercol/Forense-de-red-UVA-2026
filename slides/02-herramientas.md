@@ -59,7 +59,7 @@ Dominar Wireshark es fundamental para cualquier analista de red
 `Display Filter` = filtra la vista del archivo ya capturado
 `Capture Filter` = filtra durante la captura (BPF)
 Se puede reducir un PCAP enorme, usando tcpdump o tshark para generar un subset antes de abrirlo en Wireshark. 
-Generad una nueva copia "reducida" no sobreescribais el original. 
+Generad una nueva copia "reducida", no sobrescribáis el original.
 
 </div>
 </div>
@@ -222,7 +222,7 @@ Abrir → Investigar → Filtrar → Limpiar → Abrir de nuevo
 
 </div>
 
-</div>
+---
 
 # Problemas de ARP
 
@@ -238,15 +238,12 @@ Abrir → Investigar → Filtrar → Limpiar → Abrir de nuevo
 
 </div>
 
-</div>
-
 <div>
-
 
 **ARP Spoofing / Poisoning:**
 
 <div class="list-item">Un atacante envía ARP Replies falsos</div>
-<div class="list-item">Redirige tráfico hacia sí mismo → <strong>MITM (Machine In The Middle)</strong></div>
+<div class="list-item">Redirige tráfico hacia sí mismo → <strong>MITM (Man In The Middle)</strong></div>
 <div class="list-item">Permite capturar o modificar tráfico</div>
 
 </div>
@@ -264,8 +261,6 @@ Abrir → Investigar → Filtrar → Limpiar → Abrir de nuevo
 **Detección en Wireshark:**
 
 `arp.duplicate-address-detected` o múltiples MACs para la misma IP
-
-</div>
 
 </div>
 

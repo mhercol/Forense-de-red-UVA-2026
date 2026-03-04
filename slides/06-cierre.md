@@ -189,7 +189,7 @@ El camino más corto: un PCAP real analizado y documentado en público vale más
 
 <div class="center-content">
 
-## Network Forensics 2025
+## Network Forensics 2026
 
 **Gracias — preguntas y contacto:**
 

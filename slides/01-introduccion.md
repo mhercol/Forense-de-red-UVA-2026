@@ -284,8 +284,8 @@ I. NetFlow, Flows e Infraestructura FPC · J. APT Kill Chain — Indicadores de 
 
 **El incidente:**
 
-<div class="list-item">Un usuario interno exfiltra informacion importante de la empresa</div>
-<div class="list-item">IT captura traficos interesantes y nos piden ayuda para investigar el caso. </div>
+<div class="list-item">Un usuario interno exfiltra información importante de la empresa</div>
+<div class="list-item">IT captura tráfico interesante y nos piden ayuda para investigar el caso. </div>
 
 </div>
 <div>
@@ -425,7 +425,7 @@ Estrategia: SSLKEYLOGFILE
 <div class="list-item">Debugging de red</div>
 <div class="list-item">Análisis de malware</div>
 <div class="list-item">Respuesta a incidentes</div>
-<div class="list-item">Cursos y formacion</div>
+<div class="list-item">Cursos y formación</div>
 
 </div>
 
@@ -461,7 +461,7 @@ Estrategia: SSLKEYLOGFILE
 
 <div class="list-item">Perseguir malware</div>
 <div class="list-item">Recopilar evidencias</div>
-<div class="list-item">Recreacion del timeline del incidente</div>
+<div class="list-item">Recreación del timeline del incidente</div>
 
 </div>
 </div>
@@ -655,7 +655,7 @@ Paquetes con carga útil HTTP (método GET)
 Calcula dónde empieza el payload TCP y compara los primeros 4 bytes con 'GET ' para detectar peticiones HTTP.
 
 ```
-BPF se puede usar para cribar el tráfico que se guardara en el PCAP, una vez se tienen indicios del incidente. 
+BPF se puede usar para cribar el tráfico que se guardará en el PCAP, una vez se tienen indicios del incidente.
 
 ---
 

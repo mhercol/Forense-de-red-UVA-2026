@@ -135,7 +135,7 @@ Todas estas técnicas abusan de protocolos legítimos — bloquear el protocolo 
 
 ---
 
-# Detecting Lateral Movement
+# Detección de Movimiento Lateral
 
 <div class="cols">
 <div>

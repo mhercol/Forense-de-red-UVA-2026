@@ -211,9 +211,9 @@ Wireshark resuelve los OUI automáticamente en la columna de MACs
 
 **Escenario:**
 
-Revisando los logs de Logicorp, hemos dado con un trafico que es extraño.
+Revisando los logs de LogiCorp, hemos dado con un tráfico que es extraño.
 
-Ances de cerrar la investigacion, analiza este PCAP.
+Antes de cerrar la investigación, analiza este PCAP.
 
 **PCAP:** `Evidencia04.pcap` — contraseña del ZIP: `infected`
 
