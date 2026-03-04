@@ -150,6 +150,7 @@ Las capas aparecen **encapsuladas y ordenadas por bytes** dentro del paquete.
 </div>
 
 </div>
+
 ---
 
 # B. Decimal — Binario — Hexadecimal
