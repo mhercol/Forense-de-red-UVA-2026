@@ -372,7 +372,9 @@ I. NetFlow, Flows e Infraestructura FPC · J. APT Kill Chain — Indicadores de 
 Zero Trust es el modelo de seguridad actual que asume que nada dentro ni fuera de la red es confiable por defecto y exige autenticación, autorización y cifrado continuo para cada comunicación.
 
 </div>
+
 ```
+
 Cifrado Everywhere
   mTLS y TLS 1.3 ocultan el payload incluso internamente
 
@@ -384,6 +386,7 @@ Impacto Forense
 
 Estrategia: SSLKEYLOGFILE
   Recolección de llaves en endpoints para descifrado
+
 ```
 
 <div class="warn-box">
